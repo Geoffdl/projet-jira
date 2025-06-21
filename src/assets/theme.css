@@ -1,13 +1,7 @@
-@import "tailwindcss";
-@plugin "@tailwindcss/typography";
-@plugin "daisyui" {
-  themes: sunset;
-}
-
-@plugin "daisyui/theme" {
+#theme-sunset {
   name: "sunset";
   default: true;
-  prefersdark: false;
+  prefersdark: true;
   color-scheme: "dark";
   --color-base-100: oklch(22% 0.019 237.69);
   --color-base-200: oklch(20% 0.019 237.69);
@@ -35,21 +29,6 @@
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 1px;
-  --depth: 0;
-  --noise: 0;
-}
-
-@layer components {
-  .page-content {
-    @apply container mx-auto px-4 py-6 min-h-screen;
-  }
-  .navbar {
-    @apply flex items-center justify-between px-6 py-4 shadow-md border-b-2;
-  }
-  .footer {
-    @apply text-center p-4 mt-auto;
-  }
-  .navlink {
-    @apply hover:text-primary px-3 py-2 rounded;
-  }
+  --depth: 1;
+  --noise: 1;
 }
