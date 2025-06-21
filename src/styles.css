@@ -1,17 +1,19 @@
 @import "tailwindcss";
 
 @layer components {
+  * {
+    @apply text-gray-300 bg-blue-950;
+  }
   .page-content {
     @apply container mx-auto px-4 py-6 min-h-screen;
   }
-
-  /* Navbar */
   .navbar {
-    @apply bg-blue-600 text-white flex items-center justify-between px-6 py-4 shadow-md;
+    @apply flex items-center justify-between px-6 py-4 shadow-md border-b-2;
   }
-
-  /* Footer */
   .footer {
-    @apply bg-gray-200 text-center text-gray-700 p-4 mt-auto;
+    @apply text-center p-4 mt-auto;
+  }
+  .navlink {
+    @apply hover:text-blue-300 px-3 py-2 rounded;
   }
 }
