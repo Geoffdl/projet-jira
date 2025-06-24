@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "simple-template": {
+    "projet-jira": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -56,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "simple-template:build:production"
+              "buildTarget": "projet-jira:build:production"
             },
             "development": {
-              "buildTarget": "simple-template:build:development"
+              "buildTarget": "projet-jira:build:development"
             }
           },
           "defaultConfiguration": "development"
