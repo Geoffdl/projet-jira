@@ -22,7 +22,7 @@ import { NgComponentOutlet } from '@angular/common';
 })
 export class ModalComponent {
   openBtnName = input('open');
-  component = input<any>();
+  component : any = input();
 
   openModal() {
     const dialog = document.getElementById(
