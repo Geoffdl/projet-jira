@@ -3,8 +3,9 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-footer',
   imports: [],
-  templateUrl: './footer.html',
-  styleUrl: './footer.css'
+  template: `<footer class="du-footer">&copy; 2025 My Company</footer>
+`,
+  styles : ``,
 })
 export class Footer {
 
