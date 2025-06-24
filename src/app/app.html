@@ -1,12 +1,9 @@
 <app-nav [title]="'Jirafe'"></app-nav>
-<main class="">
-  <div class="flex flex-row h-screen">
-    <div class="w-1/16  bg-base-200 ">sidebar</div>
-    <div class="w-15/16 bg-base-100">
-      <app-dashboard></app-dashboard>
-    </div>
-  </div>
-
+<main class="bg-base-100 flex h-full">
+  <aside class="w-16 bg-base-200 p-2 text-sm">sidebar</aside>
+  <section class="flex-1 p-4 overflow-auto">
+    <app-dashboard></app-dashboard>
+  </section>
 </main>
-  <app-footer />
+<app-footer></app-footer>
 <router-outlet></router-outlet>
