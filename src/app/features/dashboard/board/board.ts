@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { List } from '../list/list';
-import { ListData } from '../../features/dashboard/list-data';
-import { TaskData } from '../../features/dashboard/task-data';
+import { IListData } from '../IListData';
+import { ITaskData } from '../ITaskData';
 
 @Component({
   selector: 'app-board',
@@ -44,7 +44,7 @@ import { TaskData } from '../../features/dashboard/task-data';
   styles: ``
 })
 export class Board {
-  taskLists = signal<ListData[]>([
+  taskLists = signal<IListData[]>([
     {
       name: 'Todo List',
       tasks: [
@@ -76,7 +76,7 @@ export class Board {
     });
   }
 
-  updateListTasks(index: number, newTasks: TaskData[]) {
+  updateListTasks(index: number, newTasks: ITaskData[]) {
     this.taskLists.update(currentLists => {
       return currentLists.map((list, i) => {
         if (i === index) {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Board } from '../../shared/board/board';
+import { Board } from './board/board';
 
 @Component({
   selector: 'app-dashboard',
