@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
   template: `
 
     @if (board()) {
-      <h1 (click)="goToBoardDetails()" class="text-xl text-accent font-semibold hover:text-secondary">{{ board()?.title }}</h1>
+      <h1 (click)="goToBoardDetails()" class="text-xl text-accent font-semibold hover:text-secondary hover:cursor-pointer">{{ board()?.title }}</h1>
 
       <button (click)="openModal()" class="du-btn du-btn-outline du-btn-sm du-btn-secondary mb-2">
         Create a new list
