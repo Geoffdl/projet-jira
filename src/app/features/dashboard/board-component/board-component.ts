@@ -21,6 +21,11 @@ import { Router } from '@angular/router';
       <h1 (click)="goToBoardDetails()"
           class="text-2xl text-accent font-semibold hover:text-secondary hover:cursor-pointer transition-colors underline">
         {{ board()?.title }}
+        <button (click)="openEditTitleModal()" class="du-btn du-btn-sm du-btn-ghost p-1" aria-label="Edit list title" title="Edit list title">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="15" height="15" fill="currentColor">
+  <path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/>
+</svg>
+  </button>
       </h1>
 
       <button (click)="openModal()" class="du-btn du-btn-secondary du-btn-sm gap-2">
@@ -59,6 +64,9 @@ import { Router } from '@angular/router';
   styles: ``
 })
 export class BoardComponent {
+openEditTitleModal() {
+throw new Error('Method not implemented.');
+}
 
   private boardService = inject(BoardDataService);
   private router = inject(Router);

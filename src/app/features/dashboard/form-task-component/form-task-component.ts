@@ -88,9 +88,6 @@ import { TaskModel } from '../dashboard-models/task-model';
 export class FormTaskComponent {
   task = input<TaskModel>();
 
-
-
-
   titleControl = new FormControl("", [
     Validators.required,
     Validators.minLength(3),
@@ -116,19 +113,6 @@ export class FormTaskComponent {
 
   formResult = output<any>();
 
-
-  constructor() {
-    effect(() => {
-      const t = this.task();
-      if (t) {
-        this.form.patchValue({
-          title: t.title,
-          description: t.description,
-          tag: t.tag
-        });
-      }
-    });
-  }
 
   onSubmit() {
     if (this.form.valid) {
