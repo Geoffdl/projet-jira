@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, ElementRef, input, output, viewChild } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
 
 @Component({
@@ -7,28 +7,23 @@ import { NgComponentOutlet } from '@angular/common';
     NgComponentOutlet
   ],
   template: `
-    <button class="du-btn du-btn-xs du-btn-outline du-btn-info" onclick="my_modal_3.showModal()">{{ openBtnName() }}</button>
-    <dialog id="my_modal_3" class="du-modal">
-      <div class="du-modal-box">
-        <form method="dialog">
-          <button class="du-btn du-btn-sm du-btn-circle du-btn-ghost absolute right-2 top-2">✕</button>
-        </form>
-        <ng-container *ngComponentOutlet="component()"></ng-container>
 
+    <dialog id="my_modal" #modalRef class="du-modal">
+      <div class="du-modal-box">
+        <ng-content></ng-content>
+        <ng-container *ngComponentOutlet="component()"></ng-container>
       </div>
+      <form method="dialog" class="du-modal-backdrop">
+        <button>close</button>
+      </form>
     </dialog>
   `,
   styles: ``
 })
 export class ModalComponent {
-  openBtnName = input('open');
-  component : any = input();
+  component = input<any>();
 
-  openModal() {
-    const dialog = document.getElementById(
-      'my_modal_2',
-    ) as HTMLDialogElement;
-    dialog?.showModal();
-  }
+
+  openModal = output();
 }
 
