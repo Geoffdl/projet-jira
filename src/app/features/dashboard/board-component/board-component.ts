@@ -15,30 +15,46 @@ import { Router } from '@angular/router';
     FormListComponent
   ],
   template: `
+@if (board()) {
+  <div class="bg-base-200 rounded-xl p-6 shadow-md space-y-6">
+    <div class="flex items-center justify-between">
+      <h1 (click)="goToBoardDetails()"
+          class="text-2xl text-accent font-semibold hover:text-secondary hover:cursor-pointer transition-colors underline">
+        {{ board()?.title }}
+      </h1>
 
-    @if (board()) {
-      <h1 (click)="goToBoardDetails()" class="text-xl text-accent font-semibold hover:text-secondary hover:cursor-pointer">{{ board()?.title }}</h1>
-
-      <button (click)="openModal()" class="du-btn du-btn-outline du-btn-sm du-btn-secondary mb-2">
-        Create a new list
+      <button (click)="openModal()" class="du-btn du-btn-secondary du-btn-sm gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+        </svg>
+        New list
       </button>
-      <app-modal-component [modalId]="modalId()" (openModal)="openModal()">
-        <app-form-list-component (formResult)="handleFormResult($event)"></app-form-list-component>
-      </app-modal-component>
+    </div>
 
-      <div class="flex flex-row">
-        @for (list of board()?.lists; track list.id) {
+    <app-modal-component [modalId]="modalId()" (openModal)="openModal()">
+      <app-form-list-component (formResult)="handleFormResult($event)"></app-form-list-component>
+    </app-modal-component>
+
+    <div class="flex gap-6 overflow-x-auto pb-4">
+      @for (list of board()?.lists; track list.id) {
+        <div class="flex-shrink-0 min-w-80">
           <app-list-component [list]="list" [boardId]="boardId()"></app-list-component>
-          <div class="du-divider du-divider-horizontal"></div>
-        } @empty {
-          <p class="text-sm italic text-neutral-content">No list yet in {{ board()?.title }}</p>
+        </div>
+        @if (!$last) {
+          <div class="du-divider du-divider-horizontal opacity-30"></div>
         }
-      </div>
-
-    } @else {
-      <p class="text-sm italic text-neutral-content">No board found</p>
-    }
-
+      } @empty {
+        <div class="flex-1 text-center py-12">
+          <p class="text-base-content/60 italic">No lists yet in {{ board()?.title }}</p>
+        </div>
+      }
+    </div>
+  </div>
+} @else {
+  <div class="text-center py-12">
+    <p class="text-base-content/60 italic">No board found</p>
+  </div>
+}
   `,
   styles: ``
 })

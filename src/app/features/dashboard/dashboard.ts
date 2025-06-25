@@ -26,34 +26,40 @@ import { RouterOutlet } from '@angular/router';
 
   ],
   template: `
-    <h1 class="text-4xl font-bold text-primary hover:text-accent pb-4">Dashboard</h1>
+<h1 class="text-4xl font-bold text-primary hover:text-accent transition-colors duration-200 pb-6">
+  Dashboard
+</h1>
 
-    <app-modal-component (openModal)="showModal()" [modalId]="modalId">
-      <app-form-board-component (formResult)="handleFormResult($event)"></app-form-board-component>
-    </app-modal-component>
+<app-modal-component (openModal)="showModal()" [modalId]="modalId">
+  <app-form-board-component (formResult)="handleFormResult($event)"></app-form-board-component>
+</app-modal-component>
 
-    <button (click)="showModal()" class="du-btn du-btn-sm du-btn-secondary mb-4">
-      Create a new board
-    </button>
+<div class="flex justify-end mb-6">
+  <button (click)="showModal()" class="du-btn du-btn-primary du-btn-sm gap-2 shadow-md hover:shadow-lg transition-shadow">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+    </svg>
+    Create board
+  </button>
+</div>
 
-    <div class="flex flex-col gap-4">
-      @for (board of boards(); track $index) {
-        <div class="du-divider du-divider-accent/50 "></div>
-        <app-board-component class="overflow-x-scroll max-h-96 overflow-y-scroll"
-                             [boardId]="board.id"
-        >
-        </app-board-component>
-      } @empty {
-        <p class="text-sm italic text-neutral-content">No boards yet !</p>
-      }
+<div class="space-y-6">
+  @for (board of boards(); track $index) {
+    @if (!$first) {
+      <div class="du-divider du-divider-accent/40"></div>
+    }
+    <app-board-component
+      class="overflow-x-auto"
+      [boardId]="board.id"
+    ></app-board-component>
+  } @empty {
+    <div class="text-center py-8">
+      <p class="text-base-content/60 italic">No boards yet!</p>
     </div>
+  }
+</div>
 
-    <!--    @if (alertMessage()) {-->
-    <!--      <app-alert-component [description]="alertMessage()" (close)="alertMessage.set('')"></app-alert-component>-->
-    <!--    }-->
-
-    <router-outlet></router-outlet>
-
+<router-outlet></router-outlet>
   `,
   styles: ``
 })

@@ -5,30 +5,44 @@ import { ListModel } from '../dashboard-models/list-model';
 import { BoardDataService } from '../board-data-service/board-data-service';
 import { ModalComponent } from '../../../shared/modal-component/modal-component';
 import { FormTaskComponent } from '../form-task-component/form-task-component';
+import { EmptyTaskComponent } from "../../../shared/empty-task-component/empty-task-component";
 
 @Component({
   selector: 'app-list-component',
   imports: [
     TaskComponent,
     ModalComponent,
-
-    FormTaskComponent
-  ],
+    FormTaskComponent,
+    EmptyTaskComponent
+],
   template: `
-    <h2 class="text-lg text-secondary font-medium">{{ list().title }}</h2>
-    <button (click)="openModal()" class="du-btn du-btn-outline du-btn-sm du-btn-accent my-2">
-      Create a new task
-    </button>
-    <app-modal-component (openModal)="openModal()" [modalId]="modalId()">
-      <app-form-task-component (formResult)="handleFormResult($event)"></app-form-task-component>
-    </app-modal-component>
+<div class="bg-base-300 rounded-xl p-4 shadow-md space-y-4 h-fit">
+  <h2 class="font-bold text-lg text-secondary flex items-center">
+    {{ list().title }}
+  </h2>
 
+  <button (click)="openModal()" class="du-btn du-btn-sm du-btn-outline du-btn-accent gap-2 w-full">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+    </svg>
+    New task
+  </button>
 
+  <app-modal-component (openModal)="openModal()" [modalId]="modalId()">
+    <app-form-task-component (formResult)="handleFormResult($event)"></app-form-task-component>
+  </app-modal-component>
+
+  <div class="space-y-3">
     @for (task of list().tasks; track task.id) {
-      <app-task-component [task]="task"></app-task-component>
+      <app-task-component [task]="task" class="m-1"></app-task-component>
     } @empty {
-      <p class="text-sm italic text-neutral-content">No task currently in {{ list().title }}</p>
+      <div class="text-center py-6">
+        <app-empty-task-component></app-empty-task-component>
+        <p class="text-base-content/60 text-sm italic mt-2">No tasks in {{ list().title }}</p>
+      </div>
     }
+  </div>
+</div>
   `,
   styles: ``
 })

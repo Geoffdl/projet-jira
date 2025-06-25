@@ -8,15 +8,18 @@ import { NgComponentOutlet } from '@angular/common';
   ],
   template: `
 
-    <dialog id="{{modalId()}}" #modalRef class="du-modal">
-      <div class="du-modal-box">
-        <ng-content></ng-content>
-        <ng-container *ngComponentOutlet="component()"></ng-container>
-      </div>
-      <form method="dialog" class="du-modal-backdrop">
-        <button>close</button>
-      </form>
-    </dialog>
+<dialog id="{{modalId()}}" #modalRef class="du-modal">
+  <div class="du-modal-box bg-base-100 border border-base-300">
+    <form method="dialog">
+      <button class="du-btn du-btn-sm du-btn-circle du-btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <ng-content></ng-content>
+    <ng-container *ngComponentOutlet="component()"></ng-container>
+  </div>
+  <form method="dialog" class="du-modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
   `,
   styles: ``
 })

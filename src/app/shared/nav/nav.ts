@@ -7,10 +7,16 @@ import { RouterLink } from '@angular/router';
     RouterLink
   ],
   template: `
-  <div class="du-navbar  bg-primary text-primary-content">
-    <button class="du-btn du-btn-ghost text-xl">{{title()}}</button>
-    <a class="du-menu du-link-neutral" routerLink="/home">Home</a>
-    <a class="du-menu du-link-neutral" routerLink="/board/1">Some Board</a>
+<div class="du-navbar bg-primary text-primary-content shadow-lg border-b border-primary-content/20">
+  <div class="flex-1">
+    <button class="du-btn du-btn-ghost text-xl font-bold">{{title()}}</button>
+  </div>
+  <div class="flex-none">
+    <ul class="du-menu du-menu-horizontal px-1 gap-2">
+      <li><a class="navlink" routerLink="/home" routerLinkActive="text-accent font-semibold">Home</a></li>
+      <li><a class="navlink" routerLink="/board/1" routerLinkActive="text-accent font-semibold">Some Board</a></li>
+    </ul>
+  </div>
 </div>
   `,
   styles: ``,
