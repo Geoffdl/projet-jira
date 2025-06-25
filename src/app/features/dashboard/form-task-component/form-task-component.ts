@@ -1,5 +1,6 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, effect, inject, input, OnChanges, output } from '@angular/core';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TaskModel } from '../dashboard-models/task-model';
 
 @Component({
   selector: 'app-form-task-component',
@@ -8,10 +9,10 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators 
     ReactiveFormsModule
   ],
   template: `
-    <div class="flex min-h-1/2 flex-col items-center justify-center gap-8">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+
         <fieldset
-          class="du-fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
+          class="du-fieldset p-4 bg-base-200 border border-base-300 rounded-box"
         >
           <legend class="du-fieldset-legend">New Task</legend>
 
@@ -76,15 +77,20 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators 
 
         </fieldset>
 
-        <button type="submit" class="du-btn du-btn-secondary du-btn-soft" [disabled]="!form.valid">
+        <button type="submit" class="du-btn du-btn-primary" [disabled]="!form.valid">
           Submit
         </button>
       </form>
-    </div>
+
   `,
   styles: ``
 })
 export class FormTaskComponent {
+  task = input<TaskModel>();
+
+
+
+
   titleControl = new FormControl("", [
     Validators.required,
     Validators.minLength(3),
@@ -111,13 +117,24 @@ export class FormTaskComponent {
   formResult = output<any>();
 
 
+  constructor() {
+    effect(() => {
+      const t = this.task();
+      if (t) {
+        this.form.patchValue({
+          title: t.title,
+          description: t.description,
+          tag: t.tag
+        });
+      }
+    });
+  }
+
   onSubmit() {
     if (this.form.valid) {
       const formData = this.form.value;
-
       this.formResult.emit(formData)
       console.log(" Form submitted:", formData);
-      this.form.reset();
     } else {
       console.warn("️ Form is invalid:", this.form.errors);
     }

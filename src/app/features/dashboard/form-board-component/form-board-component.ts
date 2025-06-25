@@ -7,10 +7,9 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
     ReactiveFormsModule
   ],
   template: `
-    <div class="flex min-h-1/2 flex-col items-center justify-center gap-8">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
         <fieldset
-          class="du-fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
+          class="du-fieldset p-4 bg-base-200 border border-base-300 rounded-box"
         >
           <legend class="du-fieldset-legend">New Board</legend>
 
@@ -36,11 +35,10 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
 
         </fieldset>
 
-        <button type="submit" class="du-btn du-btn-secondary du-btn-soft" [disabled]="!form.valid">
+        <button type="submit" class="du-btn du-btn-primary" [disabled]="!form.valid">
           Submit
         </button>
       </form>
-    </div>
   `,
   styles: ``
 })

@@ -14,8 +14,8 @@ export class BoardDataService {
         title: 'TODO',
         tasks: [{
           id: 0,
-          title: 'Some task',
-          description: 'Must be done, later?',
+          title: 'Tips',
+          description: 'Double clicking allows you to edit anywhere!',
           tag: 'essential'
         },{
           id: 1,
@@ -72,6 +72,25 @@ export class BoardDataService {
     );
   }
 
+  updateTask(updatedTask: TaskModel) {
+    this._boards.update(boards =>
+      boards.map(board => ({
+        ...board,
+        lists: board.lists.map(list => {
+          const hasTask = list.tasks.some(task => task.id === updatedTask.id);
+          return hasTask
+            ? {
+                ...list,
+                tasks: list.tasks.map(task =>
+                  task.id === updatedTask.id ? { ...updatedTask } : { ...task }
+                )
+              }
+            : list;
+        })
+      }))
+    );
+  }
+
   deleteTask(taskId: number) {
     this._boards.update(boards =>
       boards.map(board => ({
@@ -86,5 +105,43 @@ export class BoardDataService {
 
   addBoard(newBoard: BoardModel) {
     this._boards.update(boards => [...boards, newBoard]);
+  }
+  reorderTasksInList(boardId: number, listId: number, previousIndex: number, currentIndex: number) {
+    this._boards.update(boards =>
+      boards.map(board => {
+        if (board.id !== boardId) return board;
+        return {
+          ...board,
+          lists: board.lists.map(list => {
+            if (list.id !== listId) return list;
+            const tasks = [...list.tasks];
+            const [movedTask] = tasks.splice(previousIndex, 1);
+            tasks.splice(currentIndex, 0, movedTask);
+            return { ...list, tasks };
+          })
+        };
+      })
+    );
+  }
+
+  moveTaskBetweenLists(boardId: number, fromListId: number, toListId: number, task: TaskModel, toIndex: number) {
+    this._boards.update(boards =>
+      boards.map(board => {
+        if (board.id !== boardId) return board;
+        return {
+          ...board,
+          lists: board.lists.map(list => {
+            if (list.id === fromListId) {
+              return { ...list, tasks: list.tasks.filter(t => t.id !== task.id) };
+            } else if (list.id === toListId) {
+              const tasks = [...list.tasks];
+              tasks.splice(toIndex, 0, task);
+              return { ...list, tasks };
+            }
+            return list;
+          })
+        };
+      })
+    );
   }
 }

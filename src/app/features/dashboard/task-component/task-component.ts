@@ -3,17 +3,20 @@ import { TaskModel } from '../dashboard-models/task-model';
 import { BoardDataService } from '../board-data-service/board-data-service';
 import { ModalComponent } from '../../../shared/modal-component/modal-component';
 import {CdkDrag} from '@angular/cdk/drag-drop';
+import { FormTaskComponent } from "../form-task-component/form-task-component";
+import { FormEditTaskComponent } from "../form-task-component/form-edit-task-component";
 
 @Component({
   selector: 'app-task-component',
   imports: [
-    ModalComponent,CdkDrag
-  ],
+    ModalComponent, CdkDrag,
+    FormEditTaskComponent
+],
   template: `
 
-<div class="group" cdkDrag>
+<div class="group" cdkDrag [cdkDragData]="task">
   <div class="du-mockup-code bg-primary/90 text-primary-content hover:bg-accent hover:text-accent-content p-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 cursor-grab active:cursor-grabbing"
-       (contextmenu)="handleClick($event)">
+       (contextmenu)="handleClick($event)" (dblclick)="openEditModal()">
     <pre data-prefix="ttl"><code class="font-bold text-sm">{{ task().title }}</code></pre>
     <pre data-prefix="dsc"><code class="text-sm opacity-90">{{ task().description }}</code></pre>
     <pre data-prefix="tag"><code class="text-xs"><span class="du-badge du-badge-accent du-badge-sm">{{ task().tag }}</span></code></pre>
@@ -31,10 +34,14 @@ import {CdkDrag} from '@angular/cdk/drag-drop';
     </button>
   </div>
 </app-modal-component>
+<app-modal-component [modalId]="editModalId()" (openModal)="openEditModal()">
+  <app-edit-task-form (taskUpdated)="handleEditForm($event)" [task]="task()"></app-edit-task-form>
+</app-modal-component>
   `,
   styles: ``
 })
 export class TaskComponent {
+
   private boardService = inject(BoardDataService);
 
   task = input.required<TaskModel>();
@@ -57,5 +64,18 @@ export class TaskComponent {
   openModal() {
     const dialog = (document.getElementById(this.modalId()) as HTMLDialogElement);
     dialog.showModal();
+  }
+
+  editModalId = computed(() => `modal-edit-task-${this.task().id}`);
+
+  openEditModal() {
+    const dialog = document.getElementById(this.editModalId()) as HTMLDialogElement;
+    dialog.showModal();
+  }
+
+    handleEditForm(updatedTask: TaskModel) {
+      this.boardService.updateTask(updatedTask);
+      const dialog = document.getElementById(this.editModalId()) as HTMLDialogElement;
+      dialog.close();
   }
 }

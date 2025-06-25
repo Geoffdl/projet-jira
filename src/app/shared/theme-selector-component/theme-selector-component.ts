@@ -36,7 +36,7 @@ export class ThemeSelectorComponent {
     "luxury", "dracula", "cmyk", "autumn", "business", "acid", "lemonade",
     "night", "coffee", "winter", "dim", "nord", "sunset"
   ];
-  currentTheme = 'sunset';
+  currentTheme = 'synthwave';
 
   constructor(){
     this.init()
@@ -44,7 +44,7 @@ export class ThemeSelectorComponent {
 
   init() {
     const saved = localStorage.getItem('theme');
-    this.currentTheme = saved ? saved : 'sunset';
+    this.currentTheme = saved ? saved : 'synthwave';
     document.documentElement.setAttribute('data-theme', this.currentTheme);
   }
   setTheme(theme: string) {

@@ -6,6 +6,7 @@ import { BoardDataService } from '../board-data-service/board-data-service';
 import { ModalComponent } from '../../../shared/modal-component/modal-component';
 import { FormTaskComponent } from '../form-task-component/form-task-component';
 import { EmptyTaskComponent } from "../../../shared/empty-task-component/empty-task-component";
+import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-list-component',
@@ -13,7 +14,8 @@ import { EmptyTaskComponent } from "../../../shared/empty-task-component/empty-t
     TaskComponent,
     ModalComponent,
     FormTaskComponent,
-    EmptyTaskComponent
+    EmptyTaskComponent,
+    DragDropModule
 ],
   template: `
 <div class="bg-base-300 rounded-xl p-4 shadow-md space-y-4 h-fit">
@@ -32,9 +34,13 @@ import { EmptyTaskComponent } from "../../../shared/empty-task-component/empty-t
     <app-form-task-component (formResult)="handleFormResult($event)"></app-form-task-component>
   </app-modal-component>
 
-  <div class="space-y-3">
+  <div class="space-y-3"   cdkDropList
+   [id]="getDropListId(list().id)"
+  [cdkDropListData]="list().tasks"
+  [cdkDropListConnectedTo]="connectedDropLists"
+  (cdkDropListDropped)="onDrop($event)">
     @for (task of list().tasks; track task.id) {
-      <app-task-component [task]="task" class="m-1"></app-task-component>
+      <app-task-component [task]="task" class="m-1 " ></app-task-component>
     } @empty {
       <div class="text-center py-6">
         <app-empty-task-component></app-empty-task-component>
@@ -52,11 +58,27 @@ export class ListComponent {
   boardId = input.required<number>();
   list = input.required<ListModel>();
 
+  connectedDropLists: string[] = [];
+
+  ngOnInit() {
+    this.connectedDropLists = this.boardService
+      .boards()
+      .find(b => b.id === this.boardId())?.lists.map(l => this.getDropListId(l.id)) ?? [];
+  }
+
+  getDropListId(listId: number): string {
+    return `list-${listId}`;
+  }
+
+  trackById(index: number, task: TaskModel) {
+    return task.id;
+  }
+
   addTask(title: string, description: string, tag: string) {
     const newTask: TaskModel = {
-       id: Date.now(),
-       title,
-       description,
+      id: Date.now(),
+      title,
+      description,
       tag
     };
     this.boardService.addTaskToList(this.boardId(), this.list().id, newTask);
@@ -64,17 +86,42 @@ export class ListComponent {
 
   modalId = computed(() => `modal-list-${this.list().id}`);
 
+  openModal() {
+    const dialog = document.getElementById(this.modalId()) as HTMLDialogElement;
+    dialog.showModal();
+  }
 
-    openModal() {
-      const dialog = (document.getElementById(this.modalId()) as HTMLDialogElement);
-      dialog.showModal();
+  handleFormResult(event: any) {
+    this.addTask(event.title, event.description, event.tag);
+    const dialog = document.getElementById(this.modalId()) as HTMLDialogElement;
+    dialog.close();
+  }
+
+  onDrop(event: CdkDragDrop<TaskModel[]>) {
+    if (event.previousContainer === event.container) {
+      this.boardService.reorderTasksInList(
+        this.boardId(),
+        this.list().id,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      const movedTask = event.previousContainer.data[event.previousIndex];
+      const fromListId = this.extractListId(event.previousContainer.id);
+      const toListId = this.extractListId(event.container.id);
+
+      this.boardService.moveTaskBetweenLists(
+        this.boardId(),
+        fromListId,
+        toListId,
+        movedTask,
+        event.currentIndex
+      );
     }
-    handleFormResult(event: any) {
+  }
 
-      this.addTask(event.title, event.description, event.tag);
-
-      const dialog = (document.getElementById(this.modalId()) as HTMLDialogElement)
-      dialog.close();
-    }
-
+  extractListId(dropListId: string): number {
+    // "list-0" => 0
+    return Number(dropListId.replace('list-', ''));
+  }
 }
