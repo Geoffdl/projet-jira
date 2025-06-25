@@ -1,22 +1,22 @@
 import { Component, EventEmitter, Input, Output, effect, inject, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { ListModel } from '../dashboard-models/list-model';
+import { BoardModel } from '../dashboard-models/board-model';
 
 @Component({
-  selector: 'app-form-edit-list',
+  selector: 'app-form-edit-board',
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   template: `
    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
       <fieldset class="du-fieldset p-4 bg-base-200 border border-base-300 rounded-box">
-        <legend class="du-fieldset-legend">Edit List</legend>
+        <legend class="du-fieldset-legend">Edit Board</legend>
 
         <label class="du-label">Title</label>
         <input
           type="text"
           class="du-input"
-          placeholder="List title"
+          placeholder="Board title"
           formControlName="title"
           [class.du-input-success]="titleControl.valid && titleControl.touched"
           [class.du-input-warning]="titleControl.invalid && titleControl.touched"
@@ -40,11 +40,11 @@ import { ListModel } from '../dashboard-models/list-model';
     </form>
   `
 })
-export class FormEditListComponent {
+export class FormEditBoardComponent {
   private fb = inject(FormBuilder);
 
-  list = input.required<ListModel>();
-  listUpdated = output<ListModel>();
+  board = input.required<BoardModel>();
+  boardUpdated = output<BoardModel>();
 
   titleControl = new FormControl('', [
     Validators.required,
@@ -59,7 +59,7 @@ export class FormEditListComponent {
 
   constructor() {
     effect(() => {
-      const l = this.list();
+      const l = this.board();
       if (l) {
         this.form.setValue({
           id: l.id,
@@ -71,7 +71,7 @@ export class FormEditListComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      this.listUpdated.emit(this.form.getRawValue() as ListModel);
+      this.boardUpdated.emit(this.form.getRawValue() as BoardModel);
     }
   }
 }
