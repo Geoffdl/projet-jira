@@ -24,10 +24,10 @@ import { FormTaskComponent } from '../form-task-component/form-task-component';
     </app-modal-component>
 
 
-    @for (task of list().taskList; track task.id) {
+    @for (task of list().tasks; track task.id) {
       <app-task-component [task]="task"></app-task-component>
     } @empty {
-      <p class="text-sm italic text-neutral-content">No task currently in {{ list()?.title }}</p>
+      <p class="text-sm italic text-neutral-content">No task currently in {{ list().title }}</p>
     }
   `,
   styles: ``

@@ -2,8 +2,9 @@
 <main class="bg-base-100 flex h-full">
   <aside class="w-16 bg-base-200 p-2 text-sm">sidebar</aside>
   <section class="flex-1 p-4 overflow-auto">
-    <app-board-component  [boardId]="1"></app-board-component>
+    <!-- <app-dashboard></app-dashboard> -->
+    <!-- <app-board-component  [boardId]="1"></app-board-component> -->
+    <router-outlet></router-outlet>
   </section>
 </main>
 <app-footer></app-footer>
-<router-outlet></router-outlet>

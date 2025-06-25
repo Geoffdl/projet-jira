@@ -13,13 +13,13 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators 
         <fieldset
           class="du-fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
         >
-          <legend class="du-fieldset-legend">New Board</legend>
+          <legend class="du-fieldset-legend">New List</legend>
 
           <label class="du-label">Title</label>
           <input
             type="text"
             class="du-input"
-            placeholder="board title"
+            placeholder="List title"
             [formControl]="titleControl"
             [class.du-input-success]="titleControl.valid && titleControl.touched"
             [class.du-input-warning]="titleControl.invalid && titleControl.touched"

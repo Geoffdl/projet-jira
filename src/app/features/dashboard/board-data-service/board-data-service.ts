@@ -9,7 +9,7 @@ export class BoardDataService {
     {
       id: 1,
       title: 'My First Board',
-      boardList: []
+      lists: []
     }
   ]);
 
@@ -19,7 +19,7 @@ export class BoardDataService {
     this._boards.update(boards =>
       boards.map(board =>
         board.id === boardId
-          ? { ...board, boardList: [...board.boardList, newList] }
+          ? { ...board, lists: [...board.lists, newList] }
           : board
       )
     );
@@ -31,13 +31,29 @@ export class BoardDataService {
         if (board.id !== boardId) return board;
         return {
           ...board,
-          boardList: board.boardList.map(list =>
+          lists: board.lists.map(list =>
             list.id === listId
-              ? { ...list, taskList: [...list.taskList, newTask] }
+              ? { ...list, tasks: [...list.tasks, newTask] }
               : list
           )
         };
       })
     );
+  }
+
+  deleteTask(taskId: number) {
+    this._boards.update(boards =>
+      boards.map(board => ({
+        ...board,
+        lists: board.lists.map(list => ({
+          ...list,
+          tasks: list.tasks.filter(task => task.id !== taskId)
+        }))
+      }))
+    );
+  }
+
+  addBoard(newBoard: BoardModel) {
+    this._boards.update(boards => [...boards, newBoard]);
   }
 }
