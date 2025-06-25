@@ -6,6 +6,7 @@ import { TaskModel } from '../dashboard-models/task-model';
 @Injectable({ providedIn: 'root' })
 export class BoardDataService {
 
+
   private readonly _boards = signal<BoardModel[]>([
     {
       id: 1,
@@ -154,5 +155,11 @@ export class BoardDataService {
     if (list) {
       list.title = newTitle;
     }
+  }
+
+  updateBoardTitle(boardId: number, newTitle: string) {
+    const board = this.boards().find(b => b.id === boardId);
+    if (!board) return;
+    board.title = newTitle;
   }
 }

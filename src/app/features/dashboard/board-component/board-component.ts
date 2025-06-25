@@ -5,6 +5,8 @@ import { BoardDataService } from '../board-data-service/board-data-service';
 import { ModalComponent } from '../../../shared/modal-component/modal-component';
 import { FormListComponent } from '../form-list-component/form-list-component';
 import { Router } from '@angular/router';
+import { FormEditBoardComponent } from "../form-board-component/form-edit-board-component";
+import { BoardModel } from '../dashboard-models/board-model';
 
 // @ts-ignore
 @Component({
@@ -12,8 +14,9 @@ import { Router } from '@angular/router';
   imports: [
     ListComponent,
     ModalComponent,
-    FormListComponent
-  ],
+    FormListComponent,
+    FormEditBoardComponent
+],
   template: `
 @if (board()) {
   <div class="bg-base-200 rounded-xl p-6 shadow-md space-y-6">
@@ -60,13 +63,16 @@ import { Router } from '@angular/router';
     <p class="text-base-content/60 italic">No board found</p>
   </div>
 }
+@if (board()) {
+<app-modal-component [modalId]="editTitleModalId()" >
+  <app-form-edit-board [board]="currentBoard" (boardUpdated)="handleEditForm($event)"></app-form-edit-board>
+</app-modal-component>
+}
   `,
   styles: ``
 })
 export class BoardComponent {
-openEditTitleModal() {
-throw new Error('Method not implemented.');
-}
+
 
   private boardService = inject(BoardDataService);
   private router = inject(Router);
@@ -103,4 +109,35 @@ throw new Error('Method not implemented.');
   goToBoardDetails() {
     this.router.navigate(['/board', this.boardId()]);
   }
-}
+
+  //edit
+  get currentBoard(): BoardModel {
+    const b = this.board();
+    if (!b) throw new Error("Board is undefined");
+    return b;
+  }
+  editTitle = signal('');
+
+  editTitleModalId = computed(() => {
+    const board = this.board();
+    if (!board) return 'modal-edit-title-board-unknown';
+    return `modal-edit-title-board-${board.id}`;
+  });
+
+  openEditTitleModal() {
+    const board = this.board();
+    if (!board) return;
+    this.editTitle.set(board.title);
+    const dialog = document.getElementById(`modal-edit-title-board-${board.id}`) as HTMLDialogElement;
+    dialog?.showModal();
+  }
+
+  closeEditTitleModal() {
+    const dialog = document.getElementById(this.editTitleModalId()) as HTMLDialogElement;
+    dialog.close();
+  }
+  handleEditForm(updatedBoard: BoardModel) {
+    this.boardService.updateBoardTitle(this.boardId(), updatedBoard.title);
+    this.closeEditTitleModal();
+    }
+  }
