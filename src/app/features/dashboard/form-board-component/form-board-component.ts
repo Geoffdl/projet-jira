@@ -2,7 +2,7 @@ import { Component, inject, output } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-form-dashboard-component',
+  selector: 'app-form-board-component',
   imports: [
     ReactiveFormsModule
   ],
@@ -44,7 +44,7 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
   `,
   styles: ``
 })
-export class FormDashboardComponent {
+export class FormBoardComponent {
   titleControl = new FormControl("", [
     Validators.required,
     Validators.minLength(3),
@@ -57,14 +57,14 @@ export class FormDashboardComponent {
 
   });
 
-  formResult = output<string>();
+  formResult = output<any>();
 
 
   onSubmit() {
     if (this.form.valid) {
       const formData = this.form.value;
 
-      this.formResult.emit(<string>formData.title)
+      this.formResult.emit(formData)
       console.log(" Form submitted:", formData);
       this.form.reset();
     } else {

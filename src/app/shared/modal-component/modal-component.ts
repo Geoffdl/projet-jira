@@ -8,7 +8,7 @@ import { NgComponentOutlet } from '@angular/common';
   ],
   template: `
 
-    <dialog id="my_modal" #modalRef class="du-modal">
+    <dialog id="{{modalId()}}" #modalRef class="du-modal">
       <div class="du-modal-box">
         <ng-content></ng-content>
         <ng-container *ngComponentOutlet="component()"></ng-container>
@@ -23,6 +23,7 @@ import { NgComponentOutlet } from '@angular/common';
 export class ModalComponent {
   component = input<any>();
 
+  modalId = input.required<string>();
 
   openModal = output();
 }
