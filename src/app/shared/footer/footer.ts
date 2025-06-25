@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   <div class="container mx-auto text-center">
     <p class="text-sm text-base-content/80">
       &copy; 2025
-      <span class="text-primary font-semibold hover:text-accent transition-colors">&#64;Geoffdl</span>
+      <span class="text-primary font-semibold hover:text-accent transition-colors"><a href="https://github.com/Geoffdl" target="_blank">&#64;Geoffdl</a></span>
     </p>
   </div>
 </footer>

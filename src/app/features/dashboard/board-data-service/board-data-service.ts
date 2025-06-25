@@ -9,6 +9,37 @@ export class BoardDataService {
     {
       id: 1,
       title: 'My First Board',
+      lists: [{
+        id: 0,
+        title: 'TODO',
+        tasks: [{
+          id: 0,
+          title: 'Some task',
+          description: 'Must be done, later?',
+          tag: 'essential'
+        },{
+          id: 1,
+          title: 'Tips',
+          description: 'You can right click on me to delete!',
+          tag: 'info'
+        },{
+          id: 2,
+          title: 'Tips',
+          description: 'Try to Drag&Drop a task!',
+          tag: 'info'
+        }]
+      }, {
+        id: 1,
+        title: 'PENDING',
+        tasks: []
+      }, {
+        id: 2,
+        title: 'DONE',
+        tasks: []
+      }]
+    },{
+      id: 2,
+      title: 'Some Other Board',
       lists: []
     }
   ]);
