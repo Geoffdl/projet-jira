@@ -1,0 +1,57 @@
+@if (board(); as currentBoard) {
+<div class="bg-base-200 space-y-6 rounded-xl p-6 shadow-md">
+    <header class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <h1
+                (click)="navigateToBoardDetails()"
+                class="text-accent hover:text-secondary text-2xl font-semibold underline transition-colors hover:cursor-pointer"
+            >
+                {{ currentBoard.title }}
+            </h1>
+            <button (click)="openEditModal()" class="du-btn du-btn-sm du-btn-ghost p-1" aria-label="Edit board title" title="Edit board title">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="15" height="15" fill="currentColor">
+                    <path
+                        d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"
+                    />
+                </svg>
+            </button>
+        </div>
+
+        <button (click)="openNewListModal()" class="du-btn du-btn-secondary du-btn-sm gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            New list
+        </button>
+    </header>
+
+    <!-- Lists Container -->
+    <div class="flex gap-6 overflow-x-auto pb-4">
+        @for (list of currentBoard.lists; track list.id) {
+        <div class="min-w-80 flex-shrink-0">
+            <app-list-component [boardId]="boardId()" [listId]="list.id" />
+        </div>
+        @if (!$last) {
+        <div class="du-divider du-divider-horizontal opacity-30"></div>
+        } } @empty {
+        <div class="flex-1 py-12 text-center">
+            <p class="text-base-content/60 italic">No lists yet in {{ currentBoard.title }}</p>
+        </div>
+        }
+    </div>
+</div>
+
+<!-- New List Modal -->
+<app-modal-component [modalId]="newListModalId()" (openModal)="openNewListModal()">
+    <app-form-list-component (formResult)="handleNewList($event)" />
+</app-modal-component>
+
+<!-- Edit Board Modal -->
+<app-modal-component [modalId]="editModalId()">
+    <app-form-edit-board [board]="currentBoard" (boardUpdated)="handleBoardUpdate($event)" />
+</app-modal-component>
+} @else {
+<div class="py-12 text-center">
+    <p class="text-base-content/60 italic">Board not found</p>
+</div>
+}

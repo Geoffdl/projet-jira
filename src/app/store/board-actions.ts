@@ -15,6 +15,8 @@ export const BoardActions = createActionGroup({
         }>(),
         'Update Task': props<{ task: TaskModel }>(),
         'Delete Task': props<{ taskId: number }>(),
+        'Delete List': props<{ boardId: number; listId: number }>(),
+        'Delete Board': props<{ boardId: number }>(),
         'Reorder Tasks': props<{
             boardId: number;
             listId: number;

@@ -1,77 +1,47 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { BoardComponent } from './board-component/board-component';
 import { BoardModel } from './dashboard-models/board-model';
 import { ModalComponent } from '../../shared/modal-component/modal-component';
-
 import { FormBoardComponent } from './form-board-component/form-board-component';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectBoards } from '../../store/board-selectors';
-import { CommonModule } from '@angular/common';
 import { BoardActions } from '../../store/board-actions';
+import { ModalService } from '../../shared/services/modal.service';
 
 @Component({
     selector: 'app-dashboard',
-    imports: [BoardComponent, ModalComponent, FormBoardComponent, RouterOutlet, CommonModule],
-    template: `
-        <h1 class="text-primary hover:text-accent pb-6 text-4xl font-bold transition-colors duration-200">Dashboard</h1>
-
-        <app-modal-component (openModal)="showModal()" [modalId]="modalId">
-            <app-form-board-component (formResult)="handleFormResult($event)"></app-form-board-component>
-        </app-modal-component>
-
-        <div class="mb-6 flex justify-end">
-            <button (click)="showModal()" class="du-btn du-btn-primary du-btn-sm gap-2 shadow-md transition-shadow hover:shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                </svg>
-                New board
-            </button>
-        </div>
-
-        <div class="space-y-6">
-            @for (board of boards() | async; track $index) {
-                @if (!$first) {
-                    <div class="du-divider du-divider-accent/40"></div>
-                }
-                <app-board-component class="overflow-x-auto" [boardId]="board.id"></app-board-component>
-            } @empty {
-                <div class="py-8 text-center">
-                    <p class="text-base-content/60 italic">No boards yet!</p>
-                </div>
-            }
-        </div>
-
-        <router-outlet></router-outlet>
-    `,
-    styles: ``,
+    templateUrl: './dashboard.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [BoardComponent, ModalComponent, FormBoardComponent, RouterOutlet],
 })
 export class Dashboard {
     private readonly store = inject(Store);
+    private readonly modalService = inject(ModalService);
 
-    boards = computed(() => this.store.select(selectBoards));
+    readonly boards = computed(() => {
+        return this.store.selectSignal(selectBoards)() ?? [];
+    });
 
-    modalId = 'modalId';
+    readonly newBoardModalId = 'modal-new-board';
 
-    showModal() {
-        const dialog = document.getElementById(this.modalId) as HTMLDialogElement;
-        dialog.showModal();
+    openNewBoardModal(): void {
+        this.modalService.openModal(this.newBoardModalId);
     }
-    addBoard(title: string) {
+
+    handleNewBoard(boardData: { title: string }): void {
         const newBoard: BoardModel = {
             id: Date.now(),
-            title,
+            title: boardData.title,
             lists: [],
         };
+
         this.store.dispatch(
             BoardActions.addBoard({
                 board: newBoard,
             }),
         );
-    }
-    handleFormResult(event: any) {
-        this.addBoard(event.title);
-        const dialog = document.getElementById(this.modalId) as HTMLDialogElement;
-        dialog.close();
+
+        this.modalService.closeModal(this.newBoardModalId);
     }
 }

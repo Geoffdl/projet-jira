@@ -1,0 +1,45 @@
+@if (list(); as currentList) {
+<div class="bg-base-300 h-fit space-y-4 rounded-xl p-4 shadow-md">
+    <header class="flex items-center gap-2">
+        <h2 class="text-secondary flex-1 text-lg font-bold">{{ currentList.title }}</h2>
+        <button (click)="openEditModal()" class="du-btn du-btn-sm du-btn-ghost p-1" aria-label="Edit list title"
+            title="Edit list title">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="15" height="15" fill="currentColor">
+                <path
+                    d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z" />
+            </svg>
+        </button>
+    </header>
+
+    <button (click)="openNewTaskModal()" class="du-btn du-btn-sm du-btn-outline du-btn-accent w-full gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+        New task
+    </button>
+
+    <!-- Tasks Container -->
+    <div class="space-y-3" cdkDropList [id]="dropListId()" [cdkDropListData]="currentList.tasks"
+        [cdkDropListConnectedTo]="connectedDropLists()" (cdkDropListDropped)="handleDrop($event)">
+        @for (task of currentList.tasks; track task.id) {
+        <app-task-component [taskId]="task.id" class="m-1" />
+        } @empty {
+        <div class="py-6 text-center">
+            <app-empty-task-component />
+            <p class="text-base-content/60 mt-2 text-sm italic">No tasks in {{ currentList.title }}</p>
+        </div>
+        }
+    </div>
+</div>
+
+<!-- New Task Modal -->
+<app-modal-component [modalId]="newTaskModalId()" (openModal)="openNewTaskModal()">
+    <app-form-task-component (formResult)="handleNewTask($event)" />
+</app-modal-component>
+
+<!-- Edit List Modal -->
+<app-modal-component [modalId]="editModalId()">
+    <app-form-edit-list [list]="currentList" (listUpdated)="handleListUpdate($event)" />
+</app-modal-component>
+}
