@@ -1,7 +1,7 @@
 {
-    // "files.exclude": {
-    //     "**/*.spec.ts": true
-    // },
+    "files.exclude": {
+        "**/*.spec.ts": true
+    },
     "workbench.colorCustomizations": {
         "sash.hoverBorder": "#9a3df8",
         "statusBar.background": "#800cf6",
