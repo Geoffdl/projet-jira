@@ -1,23 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormDashboardComponent } from './form-dashboard-component';
+import { FormBoardComponent } from './form-board-component';
 
-describe('FormDashboardComponent', () => {
-  let component: FormDashboardComponent;
-  let fixture: ComponentFixture<FormDashboardComponent>;
+describe('FormBoardComponent', () => {
+    let component: FormBoardComponent;
+    let fixture: ComponentFixture<FormBoardComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [FormDashboardComponent]
-    })
-    .compileComponents();
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [FormBoardComponent],
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(FormDashboardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(FormBoardComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });
