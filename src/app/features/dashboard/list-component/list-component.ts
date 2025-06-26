@@ -150,7 +150,6 @@ export class ListComponent {
         return Number(dropListId.replace('list-', ''));
     }
 
-    //edit
     editTitle = signal('');
     editTitleModalId = computed(() => `modal-edit-title-list-${this.list().id}`);
 

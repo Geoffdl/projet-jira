@@ -89,8 +89,6 @@ export class BoardComponent {
 
     readonly lists = this.store.selectSignal(selectListsOfBoard(this.boardId()));
 
-    // readonly connectedDropLists = computed(() => this.lists().map((list) => `list-${list.id}`));
-
     addList(title: string) {
         const newList: ListModel = {
             id: Date.now(),
@@ -121,7 +119,6 @@ export class BoardComponent {
         this.router.navigate(['/board', this.boardId()]);
     }
 
-    // edit;
     get currentBoard(): BoardModel {
         const b = this.board();
         if (!b) throw new Error('Board is undefined');
