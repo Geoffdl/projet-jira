@@ -15,8 +15,17 @@ import { ModalService } from '../../shared/services/modal.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [BoardComponent, ModalComponent, FormBoardComponent, RouterOutlet],
 })
+/**
+ * Dashboard view that contains all the boards > lists > tasks of the app. It is implemented into the home page.
+ */
 export class Dashboard {
+    /**
+     * Ngrx impl
+     */
     private readonly store = inject(Store);
+    /**
+     * Modal service
+     */
     private readonly modalService = inject(ModalService);
 
     readonly boards = computed(() => {

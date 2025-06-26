@@ -7,4 +7,7 @@ import { Dashboard } from '../../dashboard/dashboard';
     template: ` <app-dashboard></app-dashboard> `,
     styles: ``,
 })
+/**
+ * home page
+ */
 export class HomeComponent {}

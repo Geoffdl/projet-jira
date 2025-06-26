@@ -18,40 +18,70 @@ import { ModalService } from '../../../shared/services/modal.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [TaskComponent, ModalComponent, FormTaskComponent, EmptyTaskComponent, DragDropModule, FormEditListComponent],
 })
+/**
+ * Handles the display of a list with its tasks. Has access to the store for fetching the data and creationg, edition, deletion operations
+ * Second main component of this app.
+ */
 export class ListComponent {
+    /**
+     * ngrx store implementation
+     */
     private readonly store = inject(Store);
+    /**
+     * Modal service
+     */
     private readonly modalService = inject(ModalService);
 
     listId = input.required<number>();
     boardId = input.required<number>();
 
+    /**
+     * Fetches list by id from the store
+     */
     readonly list = computed(() => {
         return this.store.selectSignal(selectListById(this.listId()))() ?? null;
     });
-
+    /**
+     * Fetches all related lists (within the same board)
+     */
     readonly listsOfBoard = computed(() => {
         return this.store.selectSignal(selectListsOfBoard(this.boardId()))() ?? [];
     });
 
+    /**
+     * CDK Drag&Drop element (where the task is dropped)
+     */
     readonly dropListId = computed(() => `list-${this.listId()}`);
 
+    /**
+     * All connected lists within the same board
+     */
     readonly connectedDropLists = computed(() => {
         const lists = this.listsOfBoard();
         const ownId = this.dropListId();
         return lists.map((list) => `list-${list.id}`).filter((id) => id !== ownId);
     });
 
+    // modal operations
     readonly newTaskModalId = computed(() => `modal-new-task-${this.listId()}`);
     readonly editModalId = computed(() => `modal-edit-list-${this.listId()}`);
 
+    /**
+     * Opens task modal
+     */
     openNewTaskModal(): void {
         this.modalService.openModal(this.newTaskModalId());
     }
-
+    /**
+     * Opens Edit modal
+     */
     openEditModal(): void {
         this.modalService.openModal(this.editModalId());
     }
-
+    /**
+     * receives the form result and dispatches it to the store : creation
+     * @param taskData received data from creation form
+     */
     handleNewTask(taskData: { title: string; description: string; tag: string }): void {
         const newTask: TaskModel = {
             id: Date.now(),
@@ -70,7 +100,10 @@ export class ListComponent {
 
         this.modalService.closeModal(this.newTaskModalId());
     }
-
+    /**
+     * receives the form result and dispatches it to the store : update
+     * @param updatedList updated list(title)
+     */
     handleListUpdate(updatedList: ListModel): void {
         this.store.dispatch(
             BoardActions.updateListTitle({
@@ -83,6 +116,10 @@ export class ListComponent {
         this.modalService.closeModal(this.editModalId());
     }
 
+    /**
+     * Handles the drop of a card into a list
+     * @param event drop event
+     */
     handleDrop(event: CdkDragDrop<TaskModel[]>): void {
         if (event.previousContainer === event.container) {
             // Reorder within same list
