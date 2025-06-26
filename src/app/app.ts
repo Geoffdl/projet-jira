@@ -8,11 +8,9 @@ import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet, Nav, Footer, FormsModule, DragDropModule ],
-  templateUrl: './app.html',
-  styleUrl: './app.css',
+    selector: 'app-root',
+    imports: [RouterOutlet, Nav, Footer, FormsModule, DragDropModule],
+    templateUrl: './app.html',
+    styleUrl: './app.css',
 })
-export class App {
-
-}
+export class App {}

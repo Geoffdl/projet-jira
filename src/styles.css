@@ -1,22 +1,21 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
-  prefix: "du-";
-  themes:  all;
+    prefix: "du-";
+    themes: all;
 }
 
-
 @layer components {
-  .page-content {
-    @apply container mx-auto px-4 py-6 min-h-screen;
-  }
-  .navbar {
-    @apply flex items-center justify-between px-6 py-4 shadow-md border-b-2;
-  }
-  .footer {
-    @apply text-center p-4 mt-auto;
-  }
-  .navlink {
-    @apply hover:text-primary px-3 py-2 rounded;
-  }
+    .page-content {
+        @apply container mx-auto min-h-screen px-4 py-6;
+    }
+    .navbar {
+        @apply flex items-center justify-between border-b-2 px-6 py-4 shadow-md;
+    }
+    .footer {
+        @apply mt-auto p-4 text-center;
+    }
+    .navlink {
+        @apply hover:text-primary rounded px-3 py-2;
+    }
 }
