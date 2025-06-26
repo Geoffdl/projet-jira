@@ -5,11 +5,17 @@ import { CommonModule } from '@angular/common';
 @Component({
     selector: 'app-form-field',
     template: `
-        <label class="du-label">{{ label() }}</label>
-        <input [type]="type()" [class]="getInputClasses()" [placeholder]="placeholder()" [formControl]="control()" />
-        @if (getErrorMessage(); as errorMsg) {
-            <p class="text-warning mt-1 text-sm">{{ errorMsg }}</p>
-        }
+        <div class="du-form-control w-full">
+            <label class="du-label">
+                <span class="du-label-text">{{ label() }}</span>
+            </label>
+            <input [type]="type()" [class]="getInputClasses()" [placeholder]="placeholder()" [formControl]="control()" />
+            @if (getErrorMessage(); as errorMsg) {
+                <label class="du-label">
+                    <span class="du-label-text-alt text-warning">{{ errorMsg }}</span>
+                </label>
+            }
+        </div>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [CommonModule, ReactiveFormsModule],
@@ -42,7 +48,7 @@ export class FormFieldComponent {
 
     getInputClasses(): string {
         const control = this.control();
-        const baseClasses = 'du-input';
+        const baseClasses = 'du-input du-input-bordered w-full';
 
         if (!control.touched) {
             return baseClasses;

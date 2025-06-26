@@ -19,23 +19,26 @@ export interface FormConfig {
 @Component({
     selector: 'app-unified-form',
     template: `
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
             <fieldset class="du-fieldset bg-base-200 border-base-300 rounded-box border p-4">
                 <legend class="du-fieldset-legend">
                     {{ isEditMode() ? 'Edit ' + config().title : 'New ' + config().title }}
                 </legend>
 
-                @for (field of config().fields; track field.key) {
-                    <app-form-field
-                        [label]="field.label"
-                        [placeholder]="field.placeholder"
-                        [type]="field.type || 'text'"
-                        [control]="$any(form.get(field.key))"
-                    />
-                }
+                <div class="space-y-3">
+                    @for (field of config().fields; track field.key) {
+                        <app-form-field
+                            class="m-4"
+                            [label]="field.label"
+                            [placeholder]="field.placeholder"
+                            [type]="field.type || 'text'"
+                            [control]="$any(form.get(field.key))"
+                        />
+                    }
+                </div>
             </fieldset>
 
-            <button type="submit" class="du-btn du-btn-primary" [disabled]="form.invalid">
+            <button type="submit" class="du-btn du-btn-primary w-full" [disabled]="form.invalid">
                 {{ isEditMode() ? 'Save Changes' : config().submitLabel || 'Create' }}
             </button>
         </form>
