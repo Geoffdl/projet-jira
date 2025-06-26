@@ -1,7 +1,7 @@
 {
-    // "files.exclude": {
-    //     "**/*.spec.ts": true
-    // },
+    "files.exclude": {
+        "**/*.spec.ts": true
+    },
     "workbench.colorCustomizations": {
         "sash.hoverBorder": "#9a3df8",
         "statusBar.background": "#800cf6",
@@ -9,23 +9,23 @@
         "statusBarItem.hoverBackground": "#9a3df8",
         "statusBarItem.remoteBackground": "#800cf6",
         "statusBarItem.remoteForeground": "#e7e7e7",
-        "panel.border": "#9a3df8",
-        "sideBar.border": "#9a3df8",
-        "editorGroup.border": "#9a3df8",
         "activityBar.activeBackground": "#9a3df8",
         "activityBar.background": "#9a3df8",
         "activityBar.foreground": "#e7e7e7",
         "activityBar.inactiveForeground": "#e7e7e799",
         "activityBarBadge.background": "#f78f28",
         "activityBarBadge.foreground": "#15202b",
-        "statusBar.border": "#800cf6",
-        "tab.activeBorder": "#9a3df8",
         "commandCenter.border": "#e7e7e799",
         "titleBar.activeBackground": "#800cf6",
         "titleBar.activeForeground": "#e7e7e7",
-        "titleBar.border": "#800cf6",
         "titleBar.inactiveBackground": "#800cf699",
-        "titleBar.inactiveForeground": "#e7e7e799"
+        "titleBar.inactiveForeground": "#e7e7e799",
+        "editorGroup.border": "#9a3df8",
+        "panel.border": "#9a3df8",
+        "sideBar.border": "#9a3df8",
+        "statusBar.border": "#800cf6",
+        "tab.activeBorder": "#9a3df8",
+        "titleBar.border": "#800cf6"
     },
     "peacock.color": "#800cf6",
     "editor.defaultFormatter": "esbenp.prettier-vscode",
