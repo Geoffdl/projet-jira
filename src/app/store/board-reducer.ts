@@ -2,9 +2,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { BoardActions } from './board-actions';
 import { initialBoardState, BoardState } from './board-state';
-import { BoardModel } from '../features/dashboard/dashboard-models/board-model';
-import { ListModel } from '../features/dashboard/dashboard-models/list-model';
-import { TaskModel } from '../features/dashboard/dashboard-models/task-model';
+import { BoardModel, ListModel } from '../shared/types/board-types';
 
 const updateBoardById = (boards: BoardModel[], boardId: number, updateFn: (board: BoardModel) => BoardModel): BoardModel[] => {
     return boards.map((board) => (board.id === boardId ? updateFn(board) : board));
@@ -208,6 +206,23 @@ export const boardReducer = createReducer(
                 ...board,
                 title: newTitle.trim(),
             })),
+        };
+    }),
+
+    on(BoardActions.deleteList, (state, { boardId, listId }): BoardState => {
+        return {
+            ...state,
+            boards: updateBoardById(state.boards, boardId, (board) => ({
+                ...board,
+                lists: board.lists.filter((list) => list.id !== listId),
+            })),
+        };
+    }),
+
+    on(BoardActions.deleteBoard, (state, { boardId }): BoardState => {
+        return {
+            ...state,
+            boards: state.boards.filter((board) => board.id !== boardId),
         };
     }),
 );

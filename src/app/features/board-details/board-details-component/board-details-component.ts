@@ -5,9 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'app-board-details-component',
     imports: [BoardComponent],
-    template: `
-        <app-board-component [boardId]="boardId"> </app-board-component>
-    `,
+    template: ` <app-board-component [boardId]="boardId"> </app-board-component> `,
     styles: ``,
 })
 export class BoardDetailsComponent {

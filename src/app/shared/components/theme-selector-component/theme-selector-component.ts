@@ -5,13 +5,7 @@ import { FormsModule } from '@angular/forms';
     selector: 'app-theme-selector-component',
     imports: [FormsModule],
     template: `
-        <button
-            class="du-btn du-btn-outline"
-            popovertarget="theme-popover"
-            style="anchor-name: --theme-anchor"
-        >
-            Theme: {{ currentTheme }}
-        </button>
+        <button class="du-btn du-btn-outline" popovertarget="theme-popover" style="anchor-name: --theme-anchor">Theme: {{ currentTheme }}</button>
 
         <ul
             popover
@@ -21,9 +15,7 @@ import { FormsModule } from '@angular/forms';
         >
             @for (theme of themes; track $index) {
                 <li (click)="setTheme(theme)">
-                    <a [class.du-active]="theme === currentTheme">{{
-                        theme
-                    }}</a>
+                    <a [class.du-active]="theme === currentTheme">{{ theme }}</a>
                 </li>
             }
         </ul>
@@ -81,9 +73,7 @@ export class ThemeSelectorComponent {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
 
-        const popover = document.getElementById(
-            'theme-popover',
-        ) as HTMLDivElement;
+        const popover = document.getElementById('theme-popover') as HTMLDivElement;
         popover?.hidePopover?.();
     }
 }

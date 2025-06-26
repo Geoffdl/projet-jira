@@ -1,8 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { BoardState } from './board-state';
-import { BoardModel } from '../features/dashboard/dashboard-models/board-model';
-import { ListModel } from '../features/dashboard/dashboard-models/list-model';
-import { TaskModel } from '../features/dashboard/dashboard-models/task-model';
+import { BoardModel, ListModel, TaskModel } from '../shared/types/board-types';
 
 export const selectBoardState = createFeatureSelector<BoardState>('board');
 

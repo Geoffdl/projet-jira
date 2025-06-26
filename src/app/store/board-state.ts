@@ -1,4 +1,4 @@
-import { BoardModel } from '../features/dashboard/dashboard-models/board-model';
+import { BoardModel } from '../shared/types/board-types';
 
 export interface BoardState {
     boards: BoardModel[];

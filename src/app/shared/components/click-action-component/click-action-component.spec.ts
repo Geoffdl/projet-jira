@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BoardDataService } from './board-data-service';
+import { ClickActionComponent } from './click-action-component';
 
-describe('BoardDataService', () => {
-  let component: BoardDataService;
-  let fixture: ComponentFixture<BoardDataService>;
+describe('ClickActionComponent', () => {
+  let component: ClickActionComponent;
+  let fixture: ComponentFixture<ClickActionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BoardDataService]
+      imports: [ClickActionComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BoardDataService);
+    fixture = TestBed.createComponent(ClickActionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

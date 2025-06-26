@@ -1,19 +1,20 @@
 import { Component, computed, inject, ChangeDetectionStrategy } from '@angular/core';
 import { BoardComponent } from './board-component/board-component';
-import { BoardModel } from './dashboard-models/board-model';
-import { ModalComponent } from '../../shared/modal-component/modal-component';
-import { FormBoardComponent } from './form-board-component/form-board-component';
+import { ModalComponent } from '../../shared/components/modal-component/modal-component';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectBoards } from '../../store/board-selectors';
 import { BoardActions } from '../../store/board-actions';
 import { ModalService } from '../../shared/services/modal.service';
+import { UnifiedFormComponent } from '../../shared/components/unified-form/unified-form.component';
+import { BoardModel } from '../../shared/types/board-types';
+import { BOARD_FORM_CONFIG } from '../../shared/utils/form-configs';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [BoardComponent, ModalComponent, FormBoardComponent, RouterOutlet],
+    imports: [BoardComponent, ModalComponent, RouterOutlet, UnifiedFormComponent],
 })
 /**
  * Dashboard view that contains all the boards > lists > tasks of the app. It is implemented into the home page.
@@ -33,12 +34,15 @@ export class Dashboard {
     });
 
     readonly newBoardModalId = 'modal-new-board';
+    readonly boardFormConfig = BOARD_FORM_CONFIG;
 
     openNewBoardModal(): void {
         this.modalService.openModal(this.newBoardModalId);
     }
 
-    handleNewBoard(boardData: { title: string }): void {
+    handleNewBoard(formResult: Record<string, any>): void {
+        const boardData = formResult as BoardModel;
+
         const newBoard: BoardModel = {
             id: Date.now(),
             title: boardData.title,

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormListComponent } from './form-list-component';
+import { DeleteElementConfirm } from './delete-element-confirm';
 
-describe('FormListComponent', () => {
-  let component: FormListComponent;
-  let fixture: ComponentFixture<FormListComponent>;
+describe('DeleteElementConfirm', () => {
+  let component: DeleteElementConfirm;
+  let fixture: ComponentFixture<DeleteElementConfirm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormListComponent]
+      imports: [DeleteElementConfirm]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FormListComponent);
+    fixture = TestBed.createComponent(DeleteElementConfirm);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
