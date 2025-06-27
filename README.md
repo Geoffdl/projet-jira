@@ -1,59 +1,34 @@
-# SimpleTemplateLts
+# Simple Angular Template
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+A quick-start Angular template with modern development tools and best practices.
 
-## Development server
+## 📚 Tech Stack
 
-To start a local development server, run:
+### Core Framework
 
-```bash
-ng serve
-```
+- **Angular 19.2.14** (LTS) - Latest long-term support version
+- **TypeScript 5.6** - Latest TypeScript features
+- **RxJS 7.8** - Reactive programming
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### State Management
 
-## Code scaffolding
+- **NgRx 19.2.1** - Redux-inspired state management
+    - @ngrx/store - Core store functionality
+    - @ngrx/effects - Side effects management
+    - @ngrx/store-devtools - Development tools
+    - @ngrx/schematics - Code generation
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Styling & UI
 
-```bash
-ng generate component component-name
-```
+- **Tailwind CSS 4.1.10** - Utility-first CSS framework
+- **DaisyUI 5.0.43** - Component library for Tailwind
+- **PostCSS 8.5** - CSS post-processing
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Development Tools
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Prettier 3.3.3** - Code formatting
+- **prettier-plugin-tailwindcss** - Tailwind class sorting
+- **ESLint 9.29** - Code linting and quality
+    - **Angular ESLint 20.1.1** - Angular-specific rules
+    - **NgRx ESLint Plugin 19.2.1** - NgRx best practices
+    - **ESLint Prettier Integration** - Seamless formatting
