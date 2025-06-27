@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "simple-template-lts": {
+        "jirafe": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -18,7 +18,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:application",
                     "options": {
-                        "outputPath": "dist/simple-template-lts",
+                        "outputPath": "dist/jirafe",
                         "index": "src/index.html",
                         "browser": "src/main.ts",
                         "polyfills": ["zone.js"],
@@ -60,10 +60,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "buildTarget": "simple-template-lts:build:production"
+                            "buildTarget": "jirafe:build:production"
                         },
                         "development": {
-                            "buildTarget": "simple-template-lts:build:development"
+                            "buildTarget": "jirafe:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
