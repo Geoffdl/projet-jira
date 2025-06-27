@@ -3,21 +3,24 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SimpleModalComponent } from './simple-modal.component';
 
 describe('SimpleModalComponent', () => {
-  let component: SimpleModalComponent;
-  let fixture: ComponentFixture<SimpleModalComponent>;
+    let component: SimpleModalComponent;
+    let fixture: ComponentFixture<SimpleModalComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [SimpleModalComponent]
-    })
-    .compileComponents();
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [SimpleModalComponent],
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(SimpleModalComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(SimpleModalComponent);
+        component = fixture.componentInstance;
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+        // Set required modalId input
+        fixture.componentRef.setInput('modalId', 'test-modal-id');
+
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

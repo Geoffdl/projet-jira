@@ -32,7 +32,7 @@ import { RouterOutlet } from '@angular/router';
                 @if (!$first) {
                     <div class="du-divider du-divider-accent/40"></div>
                 }
-                <app-board class="overflow-x-auto" [boardId]="board.id" />
+                <app-board [boardId]="board.id" />
             } @empty {
                 <div class="py-8 text-center">
                     <p class="text-base-content/60 italic">No boards yet!</p>

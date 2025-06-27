@@ -14,6 +14,11 @@ import { Component, output } from '@angular/core';
     `,
     styles: ``,
 })
+/**
+ * Wrapper component with integrated doubleclick and right click actions. used typically for edit/delete inputs
+ * @output rightclick
+ * @output doubleclick
+ */
 export class ClickActionComponent {
     rightClick = output<MouseEvent>();
     doubleClick = output<MouseEvent>();

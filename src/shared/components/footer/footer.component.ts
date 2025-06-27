@@ -17,4 +17,7 @@ import { Component } from '@angular/core';
     `,
     styles: ``,
 })
+/**
+ * footer component
+ */
 export class FooterComponent {}

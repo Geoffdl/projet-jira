@@ -21,6 +21,9 @@ import { Component } from '@angular/core';
     `,
     styles: ``,
 })
+/**
+ * Injects a new them into index.html meta data with a select input type
+ */
 export class ThemeSelectorComponent {
     themes = [
         'light',
@@ -56,7 +59,7 @@ export class ThemeSelectorComponent {
         'nord',
         'sunset',
     ];
-    currentTheme = 'synthwave';
+    currentTheme = 'dark';
 
     constructor() {
         this.init();
@@ -64,7 +67,7 @@ export class ThemeSelectorComponent {
 
     init() {
         const saved = localStorage.getItem('theme');
-        this.currentTheme = saved ? saved : 'synthwave';
+        this.currentTheme = saved ? saved : 'dark';
         document.documentElement.setAttribute('data-theme', this.currentTheme);
     }
     setTheme(theme: string) {

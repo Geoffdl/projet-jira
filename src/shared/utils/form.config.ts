@@ -1,6 +1,9 @@
 import { Validators } from '@angular/forms';
 import { FormConfig } from '../components/unified-form/unified-form.component';
 
+/**
+ * Validator set-up for tasks fields
+ */
 export const TASK_FORM_CONFIG: FormConfig = {
     title: 'Task',
     submitLabel: 'Create Task',
@@ -25,7 +28,9 @@ export const TASK_FORM_CONFIG: FormConfig = {
         },
     ],
 };
-
+/**
+ * Validator set-up for lists fields
+ */
 export const LIST_FORM_CONFIG: FormConfig = {
     title: 'List',
     submitLabel: 'Create List',
@@ -38,7 +43,9 @@ export const LIST_FORM_CONFIG: FormConfig = {
         },
     ],
 };
-
+/**
+ * Validator set-up for boards fields
+ */
 export const BOARD_FORM_CONFIG: FormConfig = {
     title: 'Board',
     submitLabel: 'Create Board',

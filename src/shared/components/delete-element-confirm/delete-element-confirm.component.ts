@@ -21,6 +21,15 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
     styles: ``,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
+/**
+ * Filler for delete event modal content
+ * @inputs :
+ * - @title  title for the card
+ * - @buttonText  text content of the confirm button
+ *
+ *  @outputs :
+ * - @confirmDelete delete event
+ */
 export class DeleteElementConfirmComponent {
     title = input.required<string>();
     buttonText = input.required<string>();

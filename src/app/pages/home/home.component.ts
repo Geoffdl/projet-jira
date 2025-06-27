@@ -7,4 +7,7 @@ import { AllBoardsComponent } from '../../features/kanban/all-boards/all-boards.
     template: ` <app-all-boards /> `,
     styles: ``,
 })
+/**
+ * Home page
+ */
 export class HomeComponent {}

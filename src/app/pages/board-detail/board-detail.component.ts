@@ -8,6 +8,9 @@ import { ActivatedRoute } from '@angular/router';
     template: ` <app-board [boardId]="boardId"></app-board> `,
     styles: ``,
 })
+/**
+ * Single board view
+ */
 export class BoardDetailComponent {
     private route = inject(ActivatedRoute);
     boardId = Number(this.route.snapshot.paramMap.get('boardId'));

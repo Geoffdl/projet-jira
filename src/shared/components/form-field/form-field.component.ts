@@ -21,6 +21,13 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
     styles: ``,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
+/**
+ * Generic form field element : controls the input and reacts dynamically to display if the field meats required criterias
+ * @param label name of the field
+ * @param control validator used on this field
+ * @param  placeholder
+ * @param type input type, defaulft to text
+ */
 export class FormFieldComponent {
     label = input.required<string>();
     control = input.required<FormControl>();
