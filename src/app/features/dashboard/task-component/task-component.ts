@@ -1,18 +1,49 @@
 import { Component, computed, inject, input, output, ChangeDetectionStrategy } from '@angular/core';
-import { TaskModel } from '../dashboard-models/task-model';
-import { ModalComponent } from '../../../shared/modal-component/modal-component';
+import { ModalComponent } from '../../../shared/components/modal-component/modal-component';
 import { CdkDrag } from '@angular/cdk/drag-drop';
-import { FormEditTaskComponent } from '../form-task-component/form-edit-task-component';
 import { Store } from '@ngrx/store';
 import { selectTaskById } from '../../../store/board-selectors';
 import { BoardActions } from '../../../store/board-actions';
+
+import { UnifiedFormComponent } from '../../../shared/components/unified-form/unified-form.component';
+import { TASK_FORM_CONFIG } from '../../../shared/utils/form-configs';
+import { TaskEditFormResult } from '../../../shared/types/form-types';
+import { TaskModel } from '../../../shared/types/board-types';
+import { DeleteElementConfirmComponent } from '../../../shared/components/delete-element-confirm/delete-element-confirm';
+import { ClickActionComponent } from '../../../shared/components/click-action-component/click-action-component';
 import { ModalService } from '../../../shared/services/modal.service';
 
 @Component({
     selector: 'app-task-component',
-    templateUrl: './task-component.html',
+    template: `
+        @if (task(); as currentTask) {
+            <div class="group" cdkDrag [cdkDragData]="currentTask">
+                <app-click-action-component (rightClick)="handleRightClick($event)" (doubleClick)="openEditModal()">
+                    <div
+                        class="du-mockup-code bg-primary/90 text-primary-content hover:bg-accent hover:text-accent-content cursor-grab rounded-lg p-3 shadow-md transition-all duration-300 hover:shadow-lg active:cursor-grabbing"
+                    >
+                        <pre data-prefix="ttl"><code class="font-bold text-sm">{{ currentTask.title }}</code></pre>
+                        <pre data-prefix="dsc"><code class="text-sm opacity-90">{{ currentTask.description }}</code></pre>
+                        <pre
+                            data-prefix="tag"
+                        ><code class="text-xs"><span class="du-badge du-badge-accent du-badge-sm">{{ currentTask.tag }}</span></code></pre>
+                    </div>
+                </app-click-action-component>
+            </div>
+
+            <!-- Actions Modal -->
+            <app-modal-component [modalId]="actionsModalId()" (openModal)="openActionsModal()">
+                <app-delete-element-confirm [title]="'Task Actions'" [buttonText]="'Delete Task'" (confirmDelete)="handleDelete()" />
+            </app-modal-component>
+
+            <!-- Edit Modal -->
+            <app-modal-component [modalId]="editModalId()" (openModal)="openEditModal()">
+                <app-unified-form [config]="taskFormConfig" [data]="currentTask" (formSubmit)="handleTaskUpdate($event)" />
+            </app-modal-component>
+        }
+    `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ModalComponent, CdkDrag, FormEditTaskComponent],
+    imports: [ModalComponent, CdkDrag, UnifiedFormComponent, DeleteElementConfirmComponent, ClickActionComponent],
 })
 export class TaskComponent {
     private readonly store = inject(Store);
@@ -25,6 +56,7 @@ export class TaskComponent {
         return this.store.selectSignal(selectTaskById(this.taskId()))() ?? null;
     });
 
+    readonly taskFormConfig = TASK_FORM_CONFIG;
     readonly actionsModalId = computed(() => `modal-task-actions-${this.taskId()}`);
     readonly editModalId = computed(() => `modal-task-edit-${this.taskId()}`);
 
@@ -46,8 +78,19 @@ export class TaskComponent {
         this.modalService.closeModal(this.actionsModalId());
     }
 
-    handleTaskUpdate(updatedTask: TaskModel): void {
-        this.store.dispatch(BoardActions.updateTask({ task: updatedTask }));
+    handleTaskUpdate(formData: Record<string, any>): void {
+        const taskData = formData as TaskEditFormResult;
+        const updatedTask: TaskModel = {
+            id: taskData.id,
+            title: taskData.title,
+            description: taskData.description,
+            tag: taskData.tag,
+        };
+        this.store.dispatch(
+            BoardActions.updateTask({
+                task: updatedTask,
+            }),
+        );
         this.modalService.closeModal(this.editModalId());
     }
 }

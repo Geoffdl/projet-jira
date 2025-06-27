@@ -1,4 +1,4 @@
-import { BoardModel } from '../features/dashboard/dashboard-models/board-model';
+import { BoardModel } from '../shared/types/board-types';
 
 export interface BoardState {
     boards: BoardModel[];
@@ -17,7 +17,7 @@ export const initialBoardState: BoardState = {
                         {
                             id: 0,
                             title: 'Tips',
-                            description: 'Double clicking allows you to edit anywhere!',
+                            description: 'Double clicking allows you to edit anything!',
                             tag: 'essential',
                         },
                         {
@@ -37,7 +37,14 @@ export const initialBoardState: BoardState = {
                 {
                     id: 1,
                     title: 'PENDING',
-                    tasks: [],
+                    tasks: [
+                        {
+                            id: 3,
+                            title: 'Tips',
+                            description: 'Right clicking allows you to delete anything!',
+                            tag: 'essential',
+                        },
+                    ],
                 },
                 {
                     id: 2,

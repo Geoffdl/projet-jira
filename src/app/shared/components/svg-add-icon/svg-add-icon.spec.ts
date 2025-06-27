@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BoardDataService } from './board-data-service';
+import { SvgAddIcon } from './svg-add-icon';
 
-describe('BoardDataService', () => {
-  let component: BoardDataService;
-  let fixture: ComponentFixture<BoardDataService>;
+describe('SvgAddIcon', () => {
+  let component: SvgAddIcon;
+  let fixture: ComponentFixture<SvgAddIcon>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BoardDataService]
+      imports: [SvgAddIcon]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BoardDataService);
+    fixture = TestBed.createComponent(SvgAddIcon);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

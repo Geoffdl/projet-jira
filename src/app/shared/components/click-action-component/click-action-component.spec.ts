@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormListComponent } from './form-list-component';
+import { ClickActionComponent } from './click-action-component';
 
-describe('FormListComponent', () => {
-  let component: FormListComponent;
-  let fixture: ComponentFixture<FormListComponent>;
+describe('ClickActionComponent', () => {
+  let component: ClickActionComponent;
+  let fixture: ComponentFixture<ClickActionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormListComponent]
+      imports: [ClickActionComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FormListComponent);
+    fixture = TestBed.createComponent(ClickActionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

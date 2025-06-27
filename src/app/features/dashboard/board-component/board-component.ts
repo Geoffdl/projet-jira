@@ -1,21 +1,24 @@
 import { Component, computed, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { ListComponent } from '../list-component/list-component';
-import { ListModel } from '../dashboard-models/list-model';
-import { ModalComponent } from '../../../shared/modal-component/modal-component';
-import { FormListComponent } from '../form-list-component/form-list-component';
+import { ModalComponent } from '../../../shared/components/modal-component/modal-component';
 import { Router } from '@angular/router';
-import { FormEditBoardComponent } from '../form-board-component/form-edit-board-component';
-import { BoardModel } from '../dashboard-models/board-model';
 import { Store } from '@ngrx/store';
 import { selectBoardById } from '../../../store/board-selectors';
 import { BoardActions } from '../../../store/board-actions';
+import { ListModel } from '../../../shared/types/board-types';
+import { UnifiedFormComponent } from '../../../shared/components/unified-form/unified-form.component';
+import { BoardEditFormResult, ListFormResult } from '../../../shared/types/form-types';
+import { BOARD_FORM_CONFIG, LIST_FORM_CONFIG } from '../../../shared/utils/form-configs';
+import { ClickActionComponent } from '../../../shared/components/click-action-component/click-action-component';
+import { DeleteElementConfirmComponent } from '../../../shared/components/delete-element-confirm/delete-element-confirm';
 import { ModalService } from '../../../shared/services/modal.service';
+import { SvgAddIcon } from '../../../shared/components/svg-add-icon/svg-add-icon';
 
 @Component({
     selector: 'app-board-component',
     templateUrl: './board-component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ListComponent, ModalComponent, FormListComponent, FormEditBoardComponent],
+    imports: [ListComponent, ModalComponent, UnifiedFormComponent, ClickActionComponent, DeleteElementConfirmComponent, SvgAddIcon],
 })
 export class BoardComponent {
     private readonly router = inject(Router);
@@ -30,6 +33,9 @@ export class BoardComponent {
 
     readonly newListModalId = computed(() => `modal-new-list-${this.boardId()}`);
     readonly editModalId = computed(() => `modal-edit-board-${this.boardId()}`);
+    readonly deleteModalId = computed(() => `modal-delete-board-${this.boardId()}`);
+    readonly boardFormConfig = BOARD_FORM_CONFIG;
+    readonly listFormConfig = LIST_FORM_CONFIG;
 
     openNewListModal(): void {
         this.modalService.openModal(this.newListModalId());
@@ -39,7 +45,17 @@ export class BoardComponent {
         this.modalService.openModal(this.editModalId());
     }
 
-    handleNewList(listData: { title: string }): void {
+    openDeleteModal(): void {
+        this.modalService.openModal(this.deleteModalId());
+    }
+
+    handleDelete(): void {
+        this.store.dispatch(BoardActions.deleteBoard({ boardId: this.boardId() }));
+        this.modalService.closeModal(this.deleteModalId());
+    }
+
+    handleNewList(formData: Record<string, any>): void {
+        const listData = formData as ListFormResult;
         const newList: ListModel = {
             id: Date.now(),
             title: listData.title,
@@ -56,11 +72,12 @@ export class BoardComponent {
         this.modalService.closeModal(this.newListModalId());
     }
 
-    handleBoardUpdate(updatedBoard: BoardModel): void {
+    handleBoardUpdate(formData: Record<string, any>): void {
+        const boardData = formData as BoardEditFormResult;
         this.store.dispatch(
             BoardActions.updateBoardTitle({
-                boardId: updatedBoard.id,
-                newTitle: updatedBoard.title,
+                boardId: this.boardId(),
+                newTitle: boardData.title,
             }),
         );
 
