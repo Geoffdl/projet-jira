@@ -10,4 +10,7 @@ import { Component } from '@angular/core';
     `,
     styles: ``,
 })
+/**
+ * Nice icons
+ */
 export class SvgAddIconComponent {}

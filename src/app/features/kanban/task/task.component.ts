@@ -43,6 +43,11 @@ import { CdkDrag } from '@angular/cdk/drag-drop';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [SimpleModalComponent, CdkDrag, UnifiedFormComponent, DeleteElementConfirmComponent, ClickActionComponent],
 })
+/**
+ * Task component
+ * @param taskId id to find the corresponding task in the store
+ * @outpud deleteTask
+ */
 export class TaskComponent {
     private readonly store = inject(Store);
     private readonly modalService = inject(ModalService);

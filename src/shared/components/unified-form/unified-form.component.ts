@@ -47,6 +47,15 @@ export interface FormConfig {
     styles: ``,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
+/**
+ * Dynamic form componets that generates based on @FormConfig models and returns a record of of these created/updated fields (@type Record<string,any>)
+ * @inputs :
+ * - @param config object of the form
+ * - @param data
+ * @outputs :
+ * - @param formSubmit(Record<string,any)
+ */
 export class UnifiedFormComponent {
     private readonly fb = inject(FormBuilder);
 

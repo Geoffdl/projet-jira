@@ -21,6 +21,9 @@ import { Component } from '@angular/core';
     `,
     styles: ``,
 })
+/**
+ * Injects a new them into index.html meta data with a select input type
+ */
 export class ThemeSelectorComponent {
     themes = [
         'light',

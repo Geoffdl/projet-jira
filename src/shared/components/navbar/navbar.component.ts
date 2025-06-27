@@ -27,6 +27,10 @@ import { RouterLink } from '@angular/router';
     `,
     styles: ``,
 })
+/**
+ * Navbar
+ * @param title title for the navbar
+ */
 export class NavbarComponent {
     title = input('');
 }
