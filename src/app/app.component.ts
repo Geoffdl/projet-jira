@@ -8,7 +8,7 @@ import { FooterComponent } from '../shared/components/footer/footer.component';
     imports: [RouterOutlet, NavbarComponent, FooterComponent],
     styles: ``,
     template: ` <app-navbar [title]="'Jirafe'"></app-navbar>
-        <main class="bg-base-200 page-content flex h-full">
+        <main class="bg-base-200 page-content min-h-screen">
             <section class="flex-1 overflow-auto p-4">
                 <router-outlet></router-outlet>
             </section>
