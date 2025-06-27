@@ -9,6 +9,7 @@ describe('ListComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [ListComponent],
+            providers: [],
         }).compileComponents();
 
         fixture = TestBed.createComponent(ListComponent);

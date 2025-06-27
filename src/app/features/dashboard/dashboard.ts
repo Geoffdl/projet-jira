@@ -5,16 +5,17 @@ import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectBoards } from '../../store/board-selectors';
 import { BoardActions } from '../../store/board-actions';
-import { ModalService } from '../../shared/services/modal.service';
 import { UnifiedFormComponent } from '../../shared/components/unified-form/unified-form.component';
 import { BoardModel } from '../../shared/types/board-types';
 import { BOARD_FORM_CONFIG } from '../../shared/utils/form-configs';
+import { ModalService } from '../../shared/services/modal.service';
+import { SvgAddIcon } from '../../shared/components/svg-add-icon/svg-add-icon';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [BoardComponent, ModalComponent, RouterOutlet, UnifiedFormComponent],
+    imports: [BoardComponent, ModalComponent, RouterOutlet, UnifiedFormComponent, SvgAddIcon],
 })
 /**
  * Dashboard view that contains all the boards > lists > tasks of the app. It is implemented into the home page.

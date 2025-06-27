@@ -6,19 +6,29 @@ import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { Store } from '@ngrx/store';
 import { selectListById, selectListsOfBoard } from '../../../store/board-selectors';
 import { BoardActions } from '../../../store/board-actions';
-import { ModalService } from '../../../shared/services/modal.service';
 import { UnifiedFormComponent } from '../../../shared/components/unified-form/unified-form.component';
 import { LIST_FORM_CONFIG, TASK_FORM_CONFIG } from '../../../shared/utils/form-configs';
 import { ListEditFormResult, TaskFormResult } from '../../../shared/types/form-types';
 import { TaskModel } from '../../../shared/types/board-types';
 import { ClickActionComponent } from '../../../shared/components/click-action-component/click-action-component';
 import { DeleteElementConfirmComponent } from '../../../shared/components/delete-element-confirm/delete-element-confirm';
+import { ModalService } from '../../../shared/services/modal.service';
+import { SvgAddIcon } from '../../../shared/components/svg-add-icon/svg-add-icon';
 
 @Component({
     selector: 'app-list-component',
     templateUrl: './list-component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [TaskComponent, ModalComponent, UnifiedFormComponent, EmptyTaskComponent, DragDropModule, ClickActionComponent, DeleteElementConfirmComponent],
+    imports: [
+        TaskComponent,
+        ModalComponent,
+        UnifiedFormComponent,
+        EmptyTaskComponent,
+        DragDropModule,
+        ClickActionComponent,
+        DeleteElementConfirmComponent,
+        SvgAddIcon,
+    ],
 })
 /**
  * Handles the display of a list with its tasks. Has access to the store for fetching the data and creationg, edition, deletion operations

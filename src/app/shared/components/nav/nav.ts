@@ -8,7 +8,7 @@ import { ThemeSelectorComponent } from '../theme-selector-component/theme-select
     template: `
         <div class="du-navbar bg-primary text-primary-content border-primary-content/20 border-b shadow-lg">
             <div class="flex-1">
-                <button class="du-btn du-btn-ghost text-xl font-bold">
+                <button class="du-btn du-btn-ghost text-xl font-bold" routerLink="/home">
                     {{ title() }}
                 </button>
             </div>

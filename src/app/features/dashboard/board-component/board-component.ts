@@ -5,19 +5,20 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectBoardById } from '../../../store/board-selectors';
 import { BoardActions } from '../../../store/board-actions';
-import { ModalService } from '../../../shared/services/modal.service';
 import { ListModel } from '../../../shared/types/board-types';
 import { UnifiedFormComponent } from '../../../shared/components/unified-form/unified-form.component';
 import { BoardEditFormResult, ListFormResult } from '../../../shared/types/form-types';
 import { BOARD_FORM_CONFIG, LIST_FORM_CONFIG } from '../../../shared/utils/form-configs';
 import { ClickActionComponent } from '../../../shared/components/click-action-component/click-action-component';
 import { DeleteElementConfirmComponent } from '../../../shared/components/delete-element-confirm/delete-element-confirm';
+import { ModalService } from '../../../shared/services/modal.service';
+import { SvgAddIcon } from '../../../shared/components/svg-add-icon/svg-add-icon';
 
 @Component({
     selector: 'app-board-component',
     templateUrl: './board-component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ListComponent, ModalComponent, UnifiedFormComponent, ClickActionComponent, DeleteElementConfirmComponent],
+    imports: [ListComponent, ModalComponent, UnifiedFormComponent, ClickActionComponent, DeleteElementConfirmComponent, SvgAddIcon],
 })
 export class BoardComponent {
     private readonly router = inject(Router);
