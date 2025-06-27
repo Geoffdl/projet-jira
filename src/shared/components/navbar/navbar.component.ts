@@ -1,9 +1,10 @@
 import { Component, input } from '@angular/core';
 import { ThemeSelectorComponent } from '../theme-selector/theme-selector.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-navbar',
-    imports: [ThemeSelectorComponent],
+    imports: [ThemeSelectorComponent, RouterLink],
     template: `
         <div class="du-navbar bg-primary text-primary-content border-primary-content/20 border-b shadow-lg">
             <div class="flex-1">
