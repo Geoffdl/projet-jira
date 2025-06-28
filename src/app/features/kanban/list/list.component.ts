@@ -13,7 +13,7 @@ import { BoardActions } from '../../../store/board.actions';
 import { selectListById, selectListsOfBoard } from '../../../store/board.selectors';
 import { TaskComponent } from '../task/task.component';
 import { SimpleModalComponent } from '../../../../shared/components/simple-modal/simple-modal.component';
-import { SvgAddIconComponent } from '../../../../shared/components/svg-add-icon/svg-add-icon.component';
+import { SvgAddIconComponent } from '../../../../assets/svgs/svg-add-icon.component';
 
 @Component({
     selector: 'app-list',
@@ -32,10 +32,10 @@ import { SvgAddIconComponent } from '../../../../shared/components/svg-add-icon/
         @if (list(); as currentList) {
             <div class="bg-base-300 h-fit space-y-4 rounded-xl p-4 shadow-md">
                 <app-click-action (rightClick)="handleRightClick()" (doubleClick)="openEditModal()">
-                    <h2 class="text-secondary mb-3 flex-1 text-center text-lg font-bold">{{ currentList.title }}</h2>
+                    <h2 class="text-base-content mb-3 flex-1 text-center text-lg font-bold">{{ currentList.title }}</h2>
                 </app-click-action>
 
-                <button (click)="openNewTaskModal()" class="du-btn du-btn-sm du-btn-outline du-btn-accent w-full gap-2">
+                <button (click)="openNewTaskModal()" class="du-btn du-btn-sm du-btn-outline du-btn-accent text-base-content w-full gap-2">
                     <app-svg-add-icon />
                     New task
                 </button>

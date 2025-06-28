@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { provideStore } from '@ngrx/store';
+import { of } from 'rxjs';
 
 import { BoardDetailComponent } from './board-detail.component';
 import { boardReducer } from '../../store/board.reducer';
@@ -18,6 +19,9 @@ describe('BoardDetailComponent', () => {
                 },
             },
             params: { subscribe: () => {} },
+            paramMap: of({
+                get: (key: string) => (key === 'boardId' ? '1' : null),
+            }),
         };
 
         await TestBed.configureTestingModule({

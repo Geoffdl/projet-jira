@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { provideStore } from '@ngrx/store';
-import { boardReducer } from '../../../app/store/board.reducer';
+import { boardReducer } from '../../../store/board.reducer';
 
-import { NavbarComponent } from './navbar.component';
+import { ListDropDownSelectorComponent } from './list-drop-down-selector.component';
 
-describe('NavbarComponent', () => {
-    let component: NavbarComponent;
-    let fixture: ComponentFixture<NavbarComponent>;
+describe('ListDropDownSelectorComponent', () => {
+    let component: ListDropDownSelectorComponent;
+    let fixture: ComponentFixture<ListDropDownSelectorComponent>;
 
     beforeEach(async () => {
         const mockActivatedRoute = {
@@ -16,7 +16,7 @@ describe('NavbarComponent', () => {
         };
 
         await TestBed.configureTestingModule({
-            imports: [NavbarComponent],
+            imports: [ListDropDownSelectorComponent],
             providers: [
                 { provide: ActivatedRoute, useValue: mockActivatedRoute },
                 provideStore({
@@ -25,7 +25,7 @@ describe('NavbarComponent', () => {
             ],
         }).compileComponents();
 
-        fixture = TestBed.createComponent(NavbarComponent);
+        fixture = TestBed.createComponent(ListDropDownSelectorComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

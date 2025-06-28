@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { ActivatedRoute } from '@angular/router';
+import { provideStore } from '@ngrx/store';
+import { boardReducer } from './store/board.reducer';
 
 describe('AppComponent', () => {
     beforeEach(async () => {
@@ -11,7 +13,12 @@ describe('AppComponent', () => {
 
         await TestBed.configureTestingModule({
             imports: [AppComponent],
-            providers: [{ provide: ActivatedRoute, useValue: mockActivatedRoute }],
+            providers: [
+                { provide: ActivatedRoute, useValue: mockActivatedRoute },
+                provideStore({
+                    board: boardReducer,
+                }),
+            ],
         }).compileComponents();
     });
 

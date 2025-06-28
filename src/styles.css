@@ -19,6 +19,30 @@
     .navlink {
         @apply hover:text-primary rounded px-3 py-2;
     }
+
+    .layout-container {
+        @apply flex min-h-screen flex-col;
+    }
+
+    .link-hover:hover {
+        @apply text-primary transition-colors duration-200;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        @apply bg-base-200;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        @apply bg-base-300 rounded-full;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        @apply bg-primary;
+    }
 }
 
 html,

@@ -9,6 +9,15 @@ export const selectBoards = createSelector(selectBoardState, (state: BoardState)
 export const selectBoardById = (id: number) =>
     createSelector(selectBoards, (boards: BoardModel[]): BoardModel | null => boards.find((board) => board.id === id) ?? null);
 
+export const selectAllBoards = () =>
+    createSelector(selectBoards, (boards: BoardModel[]): BoardModel[] => {
+        return boards;
+    });
+export const selectAllLists = () =>
+    createSelector(selectBoards, (boards: BoardModel[]): ListModel[] => {
+        return boards.flatMap((b) => b.lists);
+    });
+
 export const selectListById = (listId: number) =>
     createSelector(selectBoards, (boards: BoardModel[]): ListModel | null => {
         for (const board of boards) {

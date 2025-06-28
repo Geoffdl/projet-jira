@@ -5,18 +5,22 @@ import { BoardModel } from '../../../../shared/types/board.types';
 import { BOARD_FORM_CONFIG } from '../../../../shared/utils/form.config';
 import { BoardActions } from '../../../store/board.actions';
 import { selectBoards } from '../../../store/board.selectors';
-import { SvgAddIconComponent } from '../../../../shared/components/svg-add-icon/svg-add-icon.component';
+import { SvgAddIconComponent } from '../../../../assets/svgs/svg-add-icon.component';
 import { SimpleModalComponent } from '../../../../shared/components/simple-modal/simple-modal.component';
 import { UnifiedFormComponent } from '../../../../shared/components/unified-form/unified-form.component';
 import { BoardComponent } from '../board/board.component';
 import { RouterOutlet } from '@angular/router';
+import { BoardStatisticsComponent } from './board-statistics.component';
 
 @Component({
     selector: 'app-all-boards',
-    imports: [SvgAddIconComponent, SimpleModalComponent, UnifiedFormComponent, BoardComponent, RouterOutlet],
+    imports: [SvgAddIconComponent, SimpleModalComponent, UnifiedFormComponent, BoardComponent, RouterOutlet, BoardStatisticsComponent],
     template: `
         <header class="pb-6">
-            <h1 class="text-primary hover:text-accent text-4xl font-bold transition-colors duration-200">Dashboard</h1>
+            <h1 class="text-primary hover:text-accent text-4xl font-bold transition-colors duration-200">Boards Overview</h1>
+            <div class="mt-4">
+                <app-board-statistics />
+            </div>
         </header>
 
         <div class="mb-6 flex justify-end">
