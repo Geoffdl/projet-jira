@@ -31,7 +31,7 @@ import { SvgAddIconComponent } from '../../../../assets/svgs/svg-add-icon.compon
     template: `
         @if (list(); as currentList) {
             <div class="bg-base-300 h-fit space-y-4 rounded-xl p-4 shadow-md">
-                <app-click-action (rightClick)="handleRightClick()" (doubleClick)="openEditModal()">
+                <app-click-action class="cursor-pointer" (rightClick)="handleRightClick()" (doubleClick)="openEditModal()">
                     <h2 class="text-base-content mb-3 flex-1 text-center text-lg font-bold">{{ currentList.title }}</h2>
                 </app-click-action>
 

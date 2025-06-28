@@ -5,7 +5,7 @@ import { Component, output } from '@angular/core';
     imports: [],
     template: `
         <div
-            class="hover:text-accent-content cursor-grab shadow-md transition-all duration-300 hover:shadow-lg active:cursor-grabbing"
+            class="hover:text-accent-content shadow-md transition-all duration-300 hover:shadow-lg"
             (contextmenu)="onRightClick($event)"
             (dblclick)="onDoubleClick($event)"
         >

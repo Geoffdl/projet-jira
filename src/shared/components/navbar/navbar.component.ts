@@ -30,7 +30,7 @@ import { BoardDropDownSelectorComponent } from '../../../app/features/kanban/boa
                 <ul class="du-menu du-menu-horizontal px-1">
                     <li><a class="hover:text-primary" routerLink="/home">Home</a></li>
                     <!-- <li><a class="hover:text-primary" routerLink="/board/1">Board Details</a></li> -->
-                    <li><app-board-drop-down-selector /></li>
+                    <li><app-board-drop-down-selector class="hover:text-primary" /></li>
                     <!-- <li><a class="hover:text-primary">About</a></li>
                     <li><a class="hover:text-primary">Services</a></li>
                     <li><a class="hover:text-primary">Contact</a></li> -->

@@ -17,7 +17,7 @@ import { CdkDrag } from '@angular/cdk/drag-drop';
     template: `
         @if (task(); as currentTask) {
             <div class="group" cdkDrag [cdkDragData]="currentTask">
-                <app-click-action (rightClick)="handleRightClick()" (doubleClick)="openEditModal()">
+                <app-click-action class="cursor-grab active:cursor-grabbing" (rightClick)="handleRightClick()" (doubleClick)="openEditModal()">
                     <div
                         class="du-mockup-code bg-primary/90 text-primary-content hover:bg-accent hover:text-accent-content cursor-grab rounded-lg p-3 shadow-md transition-all duration-300 hover:shadow-lg active:cursor-grabbing"
                     >
