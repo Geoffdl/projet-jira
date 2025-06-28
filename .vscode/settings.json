@@ -19,13 +19,7 @@
         "titleBar.activeBackground": "#ea5338",
         "titleBar.activeForeground": "#e7e7e7",
         "titleBar.inactiveBackground": "#ea533899",
-        "titleBar.inactiveForeground": "#e7e7e799",
-        "editorGroup.border": "#ef7b66",
-        "panel.border": "#ef7b66",
-        "sideBar.border": "#ef7b66",
-        "statusBar.border": "#ea5338",
-        "tab.activeBorder": "#ef7b66",
-        "titleBar.border": "#ea5338"
+        "titleBar.inactiveForeground": "#e7e7e799"
     },
     "peacock.color": "#ea5338",
     "editor.defaultFormatter": "esbenp.prettier-vscode",

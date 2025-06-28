@@ -49,20 +49,36 @@ import { SvgAddIconComponent } from '../../../../assets/svgs/svg-add-icon.compon
                 </header>
 
                 <!-- Lists Container -->
-                <div class="flex gap-6 overflow-x-auto pb-4">
-                    @for (list of currentBoard.lists; track list.id) {
-                        <div class="min-w-80 flex-shrink-0">
-                            <app-list [boardId]="boardId()" [listId]="list.id" />
-                        </div>
-                        @if (!$last) {
-                            <div class="du-divider du-divider-horizontal opacity-30"></div>
+                @if (fullWidth()) {
+                    <!-- Full width grid layout for detail page -->
+                    <div class="auto-fit-minmax grid gap-6">
+                        @for (list of currentBoard.lists; track list.id) {
+                            <div class="w-full">
+                                <app-list [boardId]="boardId()" [listId]="list.id" />
+                            </div>
+                        } @empty {
+                            <div class="col-span-full py-12 text-center">
+                                <p class="text-base-content/60 italic">No lists yet in {{ currentBoard.title }}</p>
+                            </div>
                         }
-                    } @empty {
-                        <div class="flex-1 py-12 text-center">
-                            <p class="text-base-content/60 italic">No lists yet in {{ currentBoard.title }}</p>
-                        </div>
-                    }
-                </div>
+                    </div>
+                } @else {
+                    <!-- Horizontal scrolling layout for overview -->
+                    <div class="flex gap-6 overflow-x-auto pb-4">
+                        @for (list of currentBoard.lists; track list.id) {
+                            <div class="min-w-80 flex-shrink-0">
+                                <app-list [boardId]="boardId()" [listId]="list.id" />
+                            </div>
+                            @if (!$last) {
+                                <div class="du-divider du-divider-horizontal opacity-30"></div>
+                            }
+                        } @empty {
+                            <div class="flex-1 py-12 text-center">
+                                <p class="text-base-content/60 italic">No lists yet in {{ currentBoard.title }}</p>
+                            </div>
+                        }
+                    </div>
+                }
             </div>
 
             <!-- New List Modal -->
@@ -83,6 +99,11 @@ import { SvgAddIconComponent } from '../../../../assets/svgs/svg-add-icon.compon
             </div>
         }
     `,
+    styles: `
+        .auto-fit-minmax {
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+    `,
 })
 export class BoardComponent {
     private readonly router = inject(Router);
@@ -90,6 +111,7 @@ export class BoardComponent {
     private readonly modalService = inject(ModalService);
 
     boardId = input<number>(1);
+    fullWidth = input<boolean>(false);
 
     readonly board = computed(() => {
         return this.store.selectSignal(selectBoardById(this.boardId()))() ?? null;
