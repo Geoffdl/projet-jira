@@ -1,3 +1,7 @@
+# Project - Jira { Jirafe }
+
+Quickstarted with template : 
+
 # Simple Angular Template
 
 A quick-start Angular template with modern development tools and best practices.
