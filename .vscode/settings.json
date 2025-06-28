@@ -1,7 +1,7 @@
 {
-    "files.exclude": {
-        "**/*.spec.ts": true
-    },
+    // "files.exclude": {
+    //     "**/*.spec.ts": true
+    // },
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#ef7b66",
         "activityBar.background": "#ef7b66",

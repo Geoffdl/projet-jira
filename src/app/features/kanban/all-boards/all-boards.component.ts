@@ -5,7 +5,7 @@ import { BoardModel } from '../../../../shared/types/board.types';
 import { BOARD_FORM_CONFIG } from '../../../../shared/utils/form.config';
 import { BoardActions } from '../../../store/board.actions';
 import { selectBoards } from '../../../store/board.selectors';
-import { SvgAddIconComponent } from '../../../../shared/components/svg-add-icon/svg-add-icon.component';
+import { SvgAddIconComponent } from '../../../../assets/svgs/svg-add-icon.component';
 import { SimpleModalComponent } from '../../../../shared/components/simple-modal/simple-modal.component';
 import { UnifiedFormComponent } from '../../../../shared/components/unified-form/unified-form.component';
 import { BoardComponent } from '../board/board.component';

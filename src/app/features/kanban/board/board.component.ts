@@ -12,7 +12,7 @@ import { BoardActions } from '../../../store/board.actions';
 import { selectBoardById } from '../../../store/board.selectors';
 import { ListComponent } from '../list/list.component';
 import { SimpleModalComponent } from '../../../../shared/components/simple-modal/simple-modal.component';
-import { SvgAddIconComponent } from '../../../../shared/components/svg-add-icon/svg-add-icon.component';
+import { SvgAddIconComponent } from '../../../../assets/svgs/svg-add-icon.component';
 
 @Component({
     selector: 'app-board',
@@ -35,14 +35,14 @@ import { SvgAddIconComponent } from '../../../../shared/components/svg-add-icon/
                         <div class="flex items-center gap-2">
                             <h1
                                 (click)="navigateToBoardDetails()"
-                                class="text-accent hover:text-secondary text-2xl font-semibold underline transition-colors hover:cursor-pointer"
+                                class="text-base-content hover:text-secondary text-2xl font-semibold transition-colors hover:cursor-pointer"
                             >
                                 {{ currentBoard.title }}
                             </h1>
                         </div>
                     </app-click-action>
 
-                    <button (click)="openNewListModal()" class="du-btn du-btn-secondary du-btn-sm gap-2">
+                    <button (click)="openNewListModal()" class="du-btn du-btn-secondary du-btn-sm text-secondary-content gap-2">
                         <app-svg-add-icon />
                         New list
                     </button>

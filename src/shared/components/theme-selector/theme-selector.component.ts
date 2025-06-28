@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
             popover
             id="theme-popover"
             style="position-anchor: --theme-anchor"
-            class="du-dropdown du-menu bg-secondary/99 text-accent-content du-w-52 du-rounded-box du-shadow max-h-96 overflow-y-auto"
+            class="du-dropdown du-menu bg-base-300 text-accent du-w-52 du-rounded-box du-shadow max-h-96 overflow-y-auto"
         >
             @for (theme of themes; track $index) {
                 <li (click)="setTheme(theme)">
