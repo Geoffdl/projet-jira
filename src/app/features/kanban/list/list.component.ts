@@ -45,11 +45,11 @@ import { SvgAddIconComponent } from '../../../../assets/svgs/svg-add-icon.compon
                     class="space-y-3"
                     cdkDropList
                     [id]="dropListId()"
-                    [cdkDropListData]="currentList.tasks"
+                    [cdkDropListData]="tasksToDisplay()"
                     [cdkDropListConnectedTo]="connectedDropLists()"
                     (cdkDropListDropped)="handleDrop($event)"
                 >
-                    @for (task of currentList.tasks; track task.id) {
+                    @for (task of tasksToDisplay(); track task.id) {
                         <app-task [taskId]="task.id" class="m-1" />
                     } @empty {
                         <div class="py-6 text-center">
@@ -91,6 +91,7 @@ export class ListComponent {
 
     readonly listId = input.required<number>();
     readonly boardId = input.required<number>();
+    readonly filteredTasks = input<TaskModel[]>();
 
     /**
      * Fetches list by id from the store
@@ -103,6 +104,20 @@ export class ListComponent {
      */
     readonly listsOfBoard = computed(() => {
         return this.store.selectSignal(selectListsOfBoard(this.boardId()))() ?? [];
+    });
+
+    /**
+     * Gets the tasks to display - either filtered tasks or all tasks from the list
+     */
+    readonly tasksToDisplay = computed(() => {
+        const providedTasks = this.filteredTasks();
+        const currentList = this.list();
+
+        if (providedTasks !== undefined) {
+            return providedTasks;
+        }
+
+        return currentList?.tasks ?? [];
     });
 
     /**
